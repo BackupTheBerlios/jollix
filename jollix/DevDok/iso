@@ -1,4 +1,9 @@
-mkisofs -R -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table /mnt/hdd/data/gentoo-cd/jollix-06 > /mnt/hdd/data/gentoo-cd/jollix063.iso
-
-
+mkisofs -R -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table /mnt/hdd/data/gentoo-cd/jollix-01 > /mnt/hdd/data/gentoo-cd/jollix01.iso
+--------------------
+mkisofs -J -R -l -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table /mnt/hdd/data/gentoo-cd/jollix-06 -o /mnt/hdd/data/gentoo-cd/jollix063.iso
+--------------------
 isoinfo -i stage4cd.iso -R -l
+
+aus livecd-ng
+	mkisofs -J -R -l -o ${CD_BUILDROOT}/livecd.iso -b isolinux/isolinux.bin -c isolinux/boot.cat \
+	-no-emul-boot -boot-load-size 4 -boot-info-table ${ISO_ROOT}
