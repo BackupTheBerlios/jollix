@@ -247,14 +247,15 @@ IRC: irc://irc.quakenet.org/jollix
 				</p>
 				<p class="chaphead"><span class="chapnum">0.</span>&Uuml;berblick</p>
 				<ul>
-					<li>1. Vorbereitungen</li>
-					<li>2. Festplatte partitionieren</li>
-					<li>3. Dateisysteme anlegen</li>
-					<li>4. jollix auf der Festplatte installieren</li>
-					<li>5. Abschliessende Konfiguration der jollix Festplatteninstallation</li>
-					<li>6. Installation beenden und Rechner neu starten</li>
+					<li><a href="#chap1">1. Vorbereitungen</a></li>
+					<li><a href="#chap2">2. Festplatte partitionieren</a></li>
+					<li><a href="#chap3">3. Dateisysteme anlegen</a></li>
+					<li><a href="#chap4">4. jollix auf der Festplatte installieren</a></li>
+					<li><a href="#chap5">5. Abschliessende Konfiguration der jollix Festplatteninstallation</a></li>
+					<li><a href="#chap6">6. Installation beenden und Rechner neu starten</a></li>
+					<li><a href="#chap7">7. Einstellungen nach der Installation</a></li>
 				</ul>
-				<p class="chaphead"><span class="chapnum">1.</span>Vorbereitungen</p>
+				<a name="chap1"><p class="chaphead"><span class="chapnum">1.</span>Vorbereitungen</p></a>
 				<p>Alle nun folgenden Installationsschritte m&uuml;ssen als Superuser (root) in
 					einer Konsole des gebooteten jollix Systems durchgef&uuml;hrt werden. Hierzu &ouml;ffnet
 					man ein Konsolenfenster und meldet sich als Superuser mit dem Befehl
@@ -315,7 +316,7 @@ tmpfs on / type tmpfs (rw)
 <span class="redtext">jollix</span><span class="bluetext"> mnt # </span><span class="whitetext">date 060217372003</span>
 </pre></td></tr>
 </table>
-<p class="chaphead"><span class="chapnum">2.</span>Festplatte partitionieren</p>
+<a name="chap2"><p class="chaphead"><span class="chapnum">2.</span>Festplatte partitionieren</p></a>
 <p>ACHTUNG: Wie bereits in der Einleitung angek&uuml;ndigt, &uuml;bernimmt das Team von jollix keine Verantwortung f&uuml;r Sch&auml;den und/oder Datenverlust durch das Partitionieren der Festplatte! Durch fehlerhafte Partitionierung der Festplatte k&ouml;nnen alle darauf enthaltenen Daten verloren gehen. Die Partitionierung geschieht vollkommen auf eigene Gefahr!</p>
 <p>Im Folgenden soll kurz erl&auml;utert werden, was unter Partitionieren der Festplatte zu verstehen ist, in der f&uuml;r Linux typischen Benennung von Festplatten und Laufwerken und zwei m&ouml;gliche Partitionierungsm&ouml;glichkeiten aufgezeigt werden.</p>
 <p>Unter Partitionierung versteht man das Aufteilen der Festplatte in verschiedene Bereiche, die einzeln formatiert werden k&ouml;nnen. So entstehen durch Partitionierung einer 40GB Festplatte in 4 gleich grosse Teile 4 neue Festplatten zu 10GB. Die Partitionierung der Festplatte kann jederzeit wieder r&uuml;ckg&auml;ngig gemacht werden. Befindet sich eine Festplatte im Rechner, so wird diese in Linux als /dev/hda angesprochen, sofern sie als Master am ersten IDE Kanal angeschlossen ist. Eine zweite am ersten IDE Kanal als Slave angeschlossene Platte w&uuml;rde demnach als /dev/hdb, die Master Platte am zweiten IDE Kanal als /dev/hdc und wiederum die Slave Platte als /dev/hdd bezeichnet werden. In den meisten F&auml;llen werden am zweiten IDE Kanal CD/CD-RW/DVD -Laufwerke angeschlossen sein, diese werden dann ebenso bezeichnet mit hdc bzw. hdd. Die m&ouml;glichen Partitionen einer Festplatte werden von 1 an hochgezählt. Befinden sich auf hda insgesammt 3 Partitionen, so werden diese mit hda1, hda2 und hda3 bezeichnet. In den nun folgenden zwei Beispielen wird davon ausgegangen, dass sich erstens &uuml;berhaupt keine Partition auf der Festplatte befindet, diese also unpartitioniert ist, bzw. dass die darauf vorhandenen Partitionen gel&ouml;scht werden k&ouml;nnen. Das zweite Beispiel geht davon aus, dass sich auf der Platte ein anderes Betriebssystem in der 1. Partition befindet, der Rest der Festplatte aber unpartitioniert ist. F&uuml;r den Fall, dass eine einzige Partition, die gesamte Festplatte belegt, bleibt nur eine komplette Neupartitionierung. Wichtig: Dabei gehen alle Daten auf der Festplatte verloren!</p>
@@ -487,7 +488,7 @@ Syncing disks.
 
 <p>Es ist sehr wichtig, sich die Device Bezeichnungen (hda1, hda2 usw.) f&uuml;r die eigene Partitionierung genau zu merken, da diese sp&auml;ter noch f&uuml;r die Konfiguration des Systems gebraucht werden!</p>
 
-<p class="chaphead"><span class="chapnum">3.</span>Dateisysteme anlegen</p>
+<a name="chap3"><p class="chaphead"><span class="chapnum">3.</span>Dateisysteme anlegen</p></a>
 
 <p>Die zuvor angelegten Partitionen werden nun formatiert, d.h. Dateisysteme darauf angelegt. F&uuml;r die boot-Partition wird ext2 [3.1] und f&uuml;r die root-Partiton ext3 [3.3] empfohlen. Dies ist nur eine Empfehlung, es existieren weitere Dateisysteme, die aber hier jetzt nicht besprochen werden k&ouml;nnen. Nur soviel: Der sp&auml;ter installierte jollix Kernel unterst&uuml;tzt alle zur Zeit bekannten Linux Dateisysteme (inkl. XFS, JFS usw.). Die swap-Partition wird unter [3.2] eingerichtet. Hier ist es sehr wichtig, die richtigen Device Bezeichnungen der eben angelegten Partitionen zu benutzen, sonst droht Datenverlust!</p>
 
@@ -580,7 +581,7 @@ This filesystem will be automatically checked every 39 mounts or
 </pre></td></tr>
 </table>
 
-<p class="chaphead"><span class="chapnum">4.</span>jollix auf der Festplatte installieren</p>
+<a name="chap4"><p class="chaphead"><span class="chapnum">4.</span>jollix auf der Festplatte installieren</p></a>
 
 <p>Die Festplatten Partitionen sind jetzt f&uuml;r die Installation von jollix vorbereitet, so dass nun das System auf der Festplatte eingerichtet werden kann, vorher m&uuml;ssen jedoch noch die neuen Partitionen eingebunden werden, damit man sie auch ansprechen kann [4.1 bis 4.4]:</p>
 
@@ -665,7 +666,7 @@ tmpfs on / type tmpfs (rw)
 
 <p>Der nun folgende Kopiervorgang kann einige Minuten in Anspruch nehmen. Die &uuml;ber den Bildschirm laufenden Zeilen sind vom Kopierbefehl (Parameter v f&uuml;r verbose). Bitte darauf achten, dass der Befehl richtig eingegeben wurde.</p>
 
-<p class="chaphead"><span class="chapnum">5.</span>Abschliessende Konfiguration der jollix Festplatteninstallation</p>
+<a name="chap5"><p class="chaphead"><span class="chapnum">5.</span>Abschliessende Konfiguration der jollix Festplatteninstallation</p></a>
 
 <p>Nachdem nun jollix auf die Festplatte kopiert wurde, wird ein <span class="shell">chroot</span> durchgef&uuml;hrt, so dass man direkt aus dem neuen jollix System heraus &Auml;nderungen und Konfigurationen durchf&uuml;hren kann. Die folgenden Befehle der Reihe nach durchf&uuml;hren [5.1 bis 5.6]:</p>
 
@@ -813,7 +814,7 @@ tmpfs			/dev/shm	tmpfs		defaults		0 0
 </pre>
 </td></tr></table>
 
-<p>Die jetzt noch folgenden Schritte sind nur noch Restaurierungen der original Konfigurationsdateien, die f&uuml;r das richtige Funktionieren der LiveCD ver&auml;ndert werden mussten [5.11 bis 5.14].</p>
+<p>Die jetzt noch folgenden Schritte sind nur noch Restaurierungen der original Konfigurationsdateien, die f&uuml;r das richtige Funktionieren der LiveCD ver&auml;ndert werden mussten [5.11 bis 5.13].</p>
 
 <table class="ntable" width="100%" cellspacing="0" cellpadding="0" border="0">
 <tr><td class="infohead" bgcolor="#eec625"><p>
@@ -839,19 +840,11 @@ tmpfs			/dev/shm	tmpfs		defaults		0 0
 </pre></td></tr>
 </table>
 
-<table class="ntable" width="100%" cellspacing="0" cellpadding="0" border="0">
-<tr><td class="infohead" bgcolor="#eec625"><p>
-5.14: keymaps beim Booten starten, Befehl: rc-update</p></td></tr>
-<tr><td bgcolor="#000000"><pre>
-<span class="redtext">jollix</span><span class="bluetext"> / # </span><span class="whitetext">rc-update add keymaps boot</span>
-</pre></td></tr>
-</table>
-
-<p>Folgende Schritte funktionieren erst in der jollix Version 0.2 [5.15].</p>
+<p>Folgende Schritte funktionieren erst in der jollix Version 0.2 [5.14].</p>
 
 <table class="ntable" width="100%" cellspacing="0" cellpadding="0" border="0">
 <tr><td class="infohead" bgcolor="#eec625"><p>
-5.15: Installationsdatenbank wiederherstellen, Befehl: tar</p></td></tr>
+5.14: Installationsdatenbank wiederherstellen, Befehl: tar</p></td></tr>
 <tr><td bgcolor="#000000"><pre>
 <span class="redtext">jollix</span><span class="bluetext"> / # </span><span class="whitetext">cd /var</span>
 </pre>
@@ -864,7 +857,7 @@ tmpfs			/dev/shm	tmpfs		defaults		0 0
 
 <p>Jetzt ist jollix 0.2 installiert und kann von der Festplatte gebootet werden, die Schritte werden im Folgenden gezeigt.</p>
 
-<p class="chaphead"><span class="chapnum">6.</span>Installation beenden und Rechner neu starten</p>
+<a name="chap6"><p class="chaphead"><span class="chapnum">6.</span>Installation beenden und Rechner neu starten</p></a>
 
 <table class="ntable" width="100%" cellspacing="0" cellpadding="0" border="0">
 <tr><td class="infohead" bgcolor="#eec625"><p>
@@ -945,10 +938,72 @@ tmpfs			/dev/shm	tmpfs		defaults		0 0
 </pre>
 </td></tr>
 </table>
-<p>jollix ist jetzt fertig installiert inkl. aktuellem Portage und den Kernel Quellen und stellt somit ein komplettes gentoo System zur Verfügung. Weitere Informationen zu Portage gibt es <a href="http://www.gentoo.org/doc/de/portage-manual.xml" target="_blank">hier</a>.</p>
-			 </td>
-		</tr>
-	</table>
+<p>jollix ist jetzt fertig installiert inkl. aktuellem Portage und den Kernel Quellen und stellt somit ein komplettes gentoo System zur Verfügung. Weitere Informationen zu Portage gibt es <a href="http://www.gentoo.org/doc/de/portage-manual.xml" target="_blank">hier</a>.</p><br>
+<a name="chap7"><p class="chaphead"><span class="chapnum">7.</span>Einstellungen nach der Installation</p></a>
+<p>Im 7. Kapitel sollen kurz wichtige Konfigurationsarbeiten am fertig installierten jollix Systems erläutert und dazu jeweils weiterführende Internetadressen genannt werden. Die nachfolgenden Unterpunkte sind nur ein Anfang. Die Liste soll bei Bedarf weiter ausgebaut werden. Alle folgendenen Schritte werden als Superuser root durchgeführt.</p>
+<p class="chaphead2"><span class="chapnum">7.1</span>Netzwerkeinstellungen</p>
+<p>Die Netzwerkeinstellungen werden von "Netzwerk einrichten" in "jollix einrichten" nicht dauerhaft gespeichert, da dieser Dialog nur für die LiveCD gedacht ist. Im Anschluss sollen kurz die Konfigurationsschritte für die Netzwerkeinrichtung einer jollix Festplatteninstallation beschrieben werden.<br>
+<ul>
+<li>1. /etc/conf.d/net öffnen.<br>In dieser Datei werden die IP Adresse des Rechners und des Gateway eingetragen.<br>Folgende Zeilen sind relevant:<br>
+<table class="ncontent" width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td bgcolor="#dbdbdb">
+<p class="note"><b>/etc/conf.d/net:</b></p>
+<pre>iface_eth0="191.168.0.1 broadcast 192.168.0.255 netmask 255.255.255.0"
+gateway="eth0/192.168.0.1"
+</pre>
+</td></tr></table></li><br>
+<li>2. /etc/resolv.conf öffnen.<br>In dieser Datei wird die IP Adresse des DNS Servers eingetragen.<br>
+<table class="ncontent" width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td bgcolor="#dbdbdb">
+<p class="note"><b>/etc/conf.d/net:</b></p>
+<pre>nameserver 192.168.0.1
+</pre>
+</td></tr></table></li><br>
+<li>3. Modul der Netzwerkkarte (Treiber) in /etc/modules.autoload eintragen.<br>Vorher sollte man wissen, welche Netzwerkkarte sich im Rechner befindet, bzw. mit welchem Chipsatz die Netzwerkkarte ausgestattet ist, Beispiel 3c59x für 3com Karten, ne2kpci für Realtek Karten. Die von jollix automatisch geladenen Module kann man mit dem Befehl lsmod anzeigen lassen. In dieser Liste sollte, sofern die Netzwerkkarte richtig erkannt wurde, auch das Modul für die eigene Karte gelistet sein. Den Modulnamen dann anschließend in die Konfigurationsdatei /etc/modules.autoload eintragen. Das Modul wird nun automatisch beim Booten geladen, so dass im folgenden Schritt, das Netzwerk ebenfalls automatisch beim Booten gestartet werden kann.</li><br>
+<li>4. Netzwerk automatisch beim Booten starten:<br>
+<table class="ntable" width="100%" cellspacing="0" cellpadding="0" border="0">
+<tr><td class="infohead" bgcolor="#eec625"><p>
+Netzwerk automatisch beim Booten starten, Befehl rc-update add</p></td></tr>
+<tr><td bgcolor="#000000"><pre>
+<span class="redtext">jollix</span><span class="bluetext"> / # </span><span class="whitetext">rc-update add net.eth0 default</span>
+</pre>
+</td></tr>
+</table>
+<p>Mit rc-update und den Optionen add und del werden Dienste, wie das Netzwerk, zum Bootvorgang hinzugefügt bzw. entfernt ("rc-update del net.eth0 default" würde demnach das automatische Starten des Netzwerks abschalten).</p></li><br>
+<li>5. Netzwerk ohne Neustart aktivieren:<br>jollix muss nicht neu gestartet werden, um das Netzwerk sofort in Betrieb nehmen zu können. Als root folgenden Befehl in einer Konsole eingeben zum manuellen Starten des Netzwerkes:<br>
+<table class="ntable" width="100%" cellspacing="0" cellpadding="0" border="0">
+<tr><td class="infohead" bgcolor="#eec625"><p>
+Netzwerk manuell starten</p></td></tr>
+<tr><td bgcolor="#000000"><pre>
+<span class="redtext">jollix</span><span class="bluetext"> / # </span><span class="whitetext">/etc/init.d/net.eth0 start</span>
+</pre>
+</td></tr>
+</table><p>Im Verzeichnis /etc/init.d befinden sich die Startskripte zum Starten, Stoppen, Neustarten und Statusabfrage der Dienste [start, stop, restart, status]. Mehr Informationen zu den Diensten sind <a href="http://www.gentoo.org/doc/de/rc-scripts.xml" target="_blank">hier</a> zu finden.</li>
+</ul><br>
+<p class="chaphead2"><span class="chapnum">7.2</span>Drucken mit jollix, der Druckserver cups</p>
+<p>Der Druckserver cups muss vor der Konfiguration eines Druckers als Dienst gestartet werden. Folgender Befehl stellt dies sicher und startet den Druckerserver automatisch beim Booten von jollix</p>
+<table class="ntable" width="100%" cellspacing="0" cellpadding="0" border="0">
+<tr><td class="infohead" bgcolor="#eec625"><p>
+Druckerserver cups automatisch starten, Befehl rc-update add</p></td></tr>
+<tr><td bgcolor="#000000"><pre>
+<span class="redtext">jollix</span><span class="bluetext"> / # </span><span class="whitetext">rc-update add cupsd default</span>
+</pre>
+</td></tr>
+</table>
+<p>Auch hier muss jollix nicht neu gestartet werden, um den Druckerserver sofort zu starten, analog zu [7.1] lautet der Befehl:</p>
+<table class="ntable" width="100%" cellspacing="0" cellpadding="0" border="0">
+<tr><td class="infohead" bgcolor="#eec625"><p>
+Druckerserver cups manuell starten</p></td></tr>
+<tr><td bgcolor="#000000"><pre>
+<span class="redtext">jollix</span><span class="bluetext"> / # </span><span class="whitetext">/etc/init.d/cupsd start</span>
+</pre>
+</td></tr>
+</table>
+<p>Anschließend das KDE Kontrollzentrum öffnen. Unter "Angeschlossene Geräte" "Drucker" auswählen, in den "Systemverwaltungsmodus" wechseln, root Passwort eingeben und als "Aktuelles Drucksystem" CUPS auswählen. Über "Hinzufügen" den Drucker aussuchen und konfigurieren. Mehr zum Thema Drucken findet man <a href="http://www.gentoo.de/inhalte/doku/printing-howto/" target="_blank">hier.</a></p>
+
+
+
+</td>
+</tr>
+</table>
 </div>
 </body>
 

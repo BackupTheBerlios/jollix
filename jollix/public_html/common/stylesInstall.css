@@ -43,6 +43,12 @@ BODY {
 	font-weight: bold;
 }
 
+.chaphead2 {
+/*	margin: 1.2em 14% 0.5em 3%;  */
+	font-size: 1.0em;
+	font-weight: bold;
+}
+
 .chapnum {
 	font-size: 0.8em;
 }
