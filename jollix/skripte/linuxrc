@@ -1,0 +1,169 @@
+#!/bin/sh
+#
+# Script to boot up a system with autodetection of CD location
+# 
+# Daniel Robbins <drobbins@gentoo.org>
+# Copyright 2002 Gentoo Technologies, Inc.
+# Distributed under the GPL
+# 
+# Tweaked by Oliver Schwinn <patteh@web.de>
+# and Jochen Spang <knochestolle@web.de>
+# for use with jollix
+ 
+PATH=/usr/sbin:/usr/bin:/sbin:/bin
+HILITE="\033[1m"
+NORMAL="\033[0m"
+
+# / im Schreib-Lese Modus mounten
+mount -oremount,rw /
+mount /proc
+
+# Disable kernel messages to console:
+echo "0" > /proc/sys/kernel/printk
+
+# Bootprompt Optionen verarbeiten
+SCSI="yes"
+LANG_US="no"
+ATIGAMER="no"
+CMDLINE="`cat /proc/cmdline`"
+for x in $CMDLINE
+do
+	if [ "$x" = "noscsi" ]
+	then
+		SCSI="no"
+	elif [ "$x" = "lang=us" ]
+	then
+		LANG_US="yes"
+        elif [ "$x" = "atigamer" ]
+        then
+                ATIGAMER="yes"
+	fi
+done
+
+# Neues Root Dateisystem erstellen
+mkdir newroot
+mount -t tmpfs tmpfs /newroot
+cd /newroot
+mkdir dev mnt mnt/cdrom mnt/cloop mnt/.init.d
+# Device Filesystem mounten
+if [ ! -e /newroot/dev/.devfsd ]
+then
+	# mount devfs
+	mount -t devfs devfs /newroot/dev
+fi
+
+initmsg() {
+	echo -e "${HILITE}${*}${NORMAL}"
+}
+
+nocd() {
+	echo -e "${HILITE}---- CD not found${NORMAL}"
+	umount /newroot
+	ash
+	umount /proc
+	exec /linuxrc
+}
+
+# Hilfsfunktionen zur Hardwareerkennung.
+# Alles was in der ramdisk (initrd) im /modules Verzeichnis steht, wird gescannt
+blurb() {
+	echo -ne ${HILITE}${1}
+}
+backup() {
+	echo -ne "\033[0G\033[0K"
+}
+# usage: modules_scan <Typ> <Module> ; <Typ> gibt dabei den Ordner unter /modules an,
+#        in dem sich die Module befinden ; <Module> ist eine mit Leerzeichen getrennte Liste
+#        der Module im Ordner /modules/<Typ> der ramdisk.
+modules_scan() {
+	local type
+	type=${1}; shift
+	for x in "$@"
+	do
+		if [ ! -e /modules/${type}/${x}.o ]
+		then
+			echo -e "${HILITE}---- Module ${x}.o not found; skipping...${NORMAL}"
+			continue
+		fi
+		blurb "---- Scanning for ${x}..."
+		insmod -f /modules/${type}/${x}.o > /dev/null 2>&1
+		if [ $? -eq 0 ]
+		then
+			backup
+			echo -e "---- Detected ${x} hardware${NORMAL}"
+		else
+			backup
+			echo -ne "${NORMAL}"
+		fi
+	done
+}
+
+# Hilfsfunktion zum Erkennen und Mounten der LiveCD
+mounted=""
+findmount() {
+	if [ "$*" = "" ]
+	then
+		nocd
+	fi
+	while ! mount -t iso9660 -r $1 /newroot/mnt/cdrom; do
+		shift
+		if [ "$1" = "" ]; then
+			nocd
+		fi
+	done
+	if [ ! -e /newroot/mnt/cdrom/livecd.cloop ]; then
+		echo -e "${HILITE}---- $1 is not a LiveCD; skipping...${NORMAL}"
+		umount /newroot/mnt/cdrom
+		shift
+		findmount $*
+	fi
+	mounted=$1	
+	echo -e "${HILITE}---- CD Medium gefunden: $1 ----${NORMAL}"
+}
+
+# Hardwareerkennung
+#if [ "$SCSI" = "yes" ]
+#then
+#    echo -e "${HILITE}---- SCSI Hardware Erkennung ----${NORMAL}"
+#    echo -e "${HILITE}!!!!  noch nicht implementiert !!${NORMAL}"
+#    # This next "## ##" gets sed tweaked:
+#    modules_scan storage ##STORAGE_MODULES##
+#fi
+
+# Tastaturbelegung laden
+#if [ "$LANG_US" = "yes" ]
+#then
+#    loadkmap </keymaps/us.map
+#else
+#    loadkmap </keymaps/de.map
+#fi
+
+
+initmsg "---- CD mounten ----"
+findmount /newroot/dev/cdroms/*
+mknod /dev/cloop b 240 0
+
+initmsg "---- Komprimiertes loopback device (cloop) mounten ----"
+insmod /modules/cloop.o file=/newroot/mnt/cdrom/livecd.cloop 
+mount -o ro /dev/cloop /newroot/mnt/cloop
+
+initmsg "---- Kopiere Daten und Symlinks von CD um Dateisystem zu erstellen ----"
+# Neues root-Dateisystem anlegen 
+cd /newroot/
+for x in bin sbin lib boot usr opt
+do
+	ln -s mnt/cloop/${x} ${x}
+done
+mkdir initrd proc tmp 
+chmod 1777 tmp 
+(cd /newroot/mnt/cloop; cp -a etc root home var /newroot)
+# store name of mounted CD so we can add it to mtab.... 
+# (/etc/init.d/local will take it from here...)
+echo $mounted > tmp/mycd
+
+initmsg "---- Wechseln zum tmpfs root Dateisystem ----"
+echo "6" > /proc/sys/kernel/printk
+umount /proc
+pivot_root . initrd
+# init skripte in chroot Umgebung aufrufen (?)
+exec chroot . /sbin/init </dev/console >/dev/console 2>&1
