@@ -46,7 +46,7 @@ cp ${JOLLIX_DIR}/etc/fstab ${JOLLIX_DIR}/spare/etc/fstab-org
 cp ${JOLLIX_DIR}/etc/init.d/local ${JOLLIX_DIR}/spare/etc/local-org
 cp ${JOLLIX_DIR}/etc/init.d/modules ${JOLLIX_DIR}/spare/etc/modules-org
 cp ${JOLLIX_DIR}/etc/init.d/checkroot ${JOLLIX_DIR}/spare/etc/checkroot-org
-rm ${JOLLIX_DIR}/etc/runlevels/boot/keymaps
+#rm ${JOLLIX_DIR}/etc/runlevels/boot/keymaps
 cp ${WORK_DIR}/skripte/fstab ${JOLLIX_DIR}/etc/fstab
 cp ${WORK_DIR}/skripte/local ${JOLLIX_DIR}/etc/init.d/
 cp ${WORK_DIR}/skripte/modules ${JOLLIX_DIR}/etc/init.d/
@@ -68,7 +68,6 @@ echo "3. opengl settings ..."
 mkdir ${JOLLIX_DIR}/etc/opengl
 cp ${JOLLIX_DIR}/usr/sbin/opengl-update ${JOLLIX_DIR}/usr/sbin/opengl-update-org
 cp ${WORK_DIR}/skripte/opengl-update ${JOLLIX_DIR}/usr/sbin/
-cp ${WORK_DIR}/skripte/modules-jollix ${JOLLIX_DIR}/sbin/
 
 ln -sf /etc/opengl/libglx.a ${JOLLIX_DIR}/usr/X11R6/lib/modules/extensions/libglx.a
 ln -sf /etc/opengl/libglx.so ${JOLLIX_DIR}/usr/X11R6/lib/modules/extensions/libglx.so
