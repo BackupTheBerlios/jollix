@@ -1,0 +1,2 @@
+mkisofs -R -L Packages | create_compressed_fs - 65536 > livecd.cloop
+
