@@ -117,7 +117,7 @@ Besitzer einer NVidia Karte finden ihren KDE Desktop auf Strg + Alt + F7, das Sp
 auf Strg + Alt + F8. Besitzer einer ATI Karte finden den Desktop auf Strg + Alt + F8,
 das Spiel auf Strg + Alt + F7 (Achtung: Boot Option "atigamer").
 
-5. ATI Radeon Karten Unterstütztung
+5. ATI Radeon Karten Unterstützung
 ATI Kartenbesitzer können jollix 0.2 mit und ohne Bootparameter starten. Ohne
 Bootparameter erscheint nach dem Booten der bekannte KDE Desktop. Ein Spielen
 von MODS ist so jedoch nicht möglich, allerdings ist der KDE Desktop OpenGL und
@@ -856,34 +856,18 @@ tmpfs			/dev/shm	tmpfs		defaults		0 0
 </pre>
 </td></tr>
 <tr><td bgcolor="#000000"><pre>
-<span class="redtext">jollix</span><span class="bluetext"> / # </span><span class="whitetext">tar -xvjpf /spare/var-spare.tar.bz2</span>
-</pre>
-</td></tr>
-<tr><td bgcolor="#000000"><pre>
-<span class="redtext">jollix</span><span class="bluetext"> / # </span><span class="whitetext">cd /usr</span>
-</pre>
-</td></tr>
-<tr><td bgcolor="#000000"><pre>
-<span class="redtext">jollix</span><span class="bluetext"> / # </span><span class="whitetext">tar -xvjpf /spare/portage-spare.tar.bz2</span>
-</pre>
-</td></tr>
-<tr><td bgcolor="#000000"><pre>
-<span class="redtext">jollix</span><span class="bluetext"> / # </span><span class="whitetext">cd /usr/src</span>
-</pre>
-</td></tr>
-<tr><td bgcolor="#000000"><pre>
-<span class="redtext">jollix</span><span class="bluetext"> / # </span><span class="whitetext">tar -xvjpf /spare/kernel-spare.tar.bz2</span>
+<span class="redtext">jollix</span><span class="bluetext"> / # </span><span class="whitetext">tar -xjpf /spare/var-spare.tar.bz2</span>
 </pre>
 </td></tr>
 </table>
 
-<p>Jetzt ist jollix 0.2 fertig installiert und kann von der Festplatte gebootet werden, die Schritte werden im Folgenden gezeigt.</p>
+<p>Jetzt ist jollix 0.2 installiert und kann von der Festplatte gebootet werden, die Schritte werden im Folgenden gezeigt.</p>
 
 <p class="chaphead"><span class="chapnum">6.</span>Installation beenden und Rechner neu starten</p>
 
 <table class="ntable" width="100%" cellspacing="0" cellpadding="0" border="0">
 <tr><td class="infohead" bgcolor="#eec625"><p>
-5.1: Installationsverzeichnis unmounten und Neustart</p></td></tr>
+6.1: Installationsverzeichnis unmounten und Neustart</p></td></tr>
 <tr><td bgcolor="#000000"><pre>
 <span class="redtext">jollix</span><span class="bluetext"> / # </span><span class="whitetext">exit</span>
 </pre></td></tr>
@@ -903,7 +887,49 @@ tmpfs			/dev/shm	tmpfs		defaults		0 0
 <span class="redtext">jollix</span><span class="bluetext"> jollix # </span><span class="whitetext">exit</span>
 </pre></td></tr>
 </table>
+
 <p>Anschliessend den Rechner neu starten und die neue jollix Festplatteninstallation booten.</p>
+
+<p>Die folgenden Schritte nach dem ersten Booten von jollix durchführen. Sie erfordern das Downloaden der im FTP Verzeichnis <span class="path">ftp://ftp.berlios.de/pub/jollix/spare/</span> enthaltenen Dateien. Dies sind: portage-spare.tar.bz2, kernel-spare.tar.bz2 und doc-spare.tar.bz2. Diese drei Dateien in <span class="path">/spare</span> speichern und die nachfolgenden Befehle als root ausführen.</p>
+
+<table class="ntable" width="100%" cellspacing="0" cellpadding="0" border="0">
+<tr><td class="infohead" bgcolor="#eec625"><p>
+6.2: Portage, Kernel Archiv und Dokumentation wiederherstellen, Befehl: tar</p></td></tr>
+<tr><td bgcolor="#000000"><pre>
+<span class="redtext">jollix</span><span class="bluetext"> / # </span><span class="whitetext">cd /usr</span>
+</pre>
+</td></tr>
+<tr><td bgcolor="#000000"><pre>
+<span class="redtext">jollix</span><span class="bluetext"> / # </span><span class="whitetext">tar -xjpf /spare/portage-spare.tar.bz2</span>
+</pre>
+</td></tr>
+<tr><td bgcolor="#000000"><pre>
+<span class="redtext">jollix</span><span class="bluetext"> / # </span><span class="whitetext">cd /usr/src</span>
+</pre>
+</td></tr>
+<tr><td bgcolor="#000000"><pre>
+<span class="redtext">jollix</span><span class="bluetext"> / # </span><span class="whitetext">tar -xjpf /spare/kernel-spare.tar.bz2</span>
+</pre>
+</td></tr>
+<tr><td bgcolor="#000000"><pre>
+<span class="redtext">jollix</span><span class="bluetext"> / # </span><span class="whitetext">cd /usr/share</span>
+</pre>
+</td></tr>
+<tr><td bgcolor="#000000"><pre>
+<span class="redtext">jollix</span><span class="bluetext"> / # </span><span class="whitetext">tar -xjpf /spare/doc-spare.tar.bz2</span>
+</pre>
+</td></tr>
+</table>
+<p>Abschließend die Portage ebuild Datenbank updaten.</p>
+<table class="ntable" width="100%" cellspacing="0" cellpadding="0" border="0">
+<tr><td class="infohead" bgcolor="#eec625"><p>
+6.3: Portage updaten, Befehl: emerge sync</p></td></tr>
+<tr><td bgcolor="#000000"><pre>
+<span class="redtext">jollix</span><span class="bluetext"> / # </span><span class="whitetext">emerge sync</span>
+</pre>
+</td></tr>
+</table>
+<p>jollix ist jetzt fertig installiert inkl. aktuellem Portage und den Kernel Quellen und stellt somit ein komplettes gentoo System zur Verfügung. Weitere Informationen zu Portage gibt es <a href="http://www.gentoo.org/doc/de/portage-manual.xml">hier</a>.</p>
 			 </td>
 		</tr>
 	</table>
