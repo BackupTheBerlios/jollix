@@ -64,14 +64,21 @@
 				</ul>
 				<h4>Known Bugs / Bekannte Fehler der 0.2:</h4>
 				<ul>
-					<li>???</li>
+					<li>Das ISDN Einwahlskript wird falsch erstellt. Nachdem der Konfigurationsdialog
+					 beendet ist, existiert die Datei /etc/ppp/peers/isdn/jollixISDN. In dieser muss
+					 von Hand hinter <pre>number</pre> die Telefonnummer des Providers eingetragen werden.
+					 Dort steht fälschlicherweise die IP-Adresse des DNS-Servers.<br>
+					 Wer jollix installiert hat, kann das fehlerbereinigte
+					 Konfigurations-Skript <a href="../common/isdn-setup.sh">isdn-setup.sh hier downloaden.</a>
+					 Nachdem das Skript (als root) in das Verzeichnis /usr/bin/ kopiert wurde muss noch
+					 <pre>chmod u+x /usr/bin/isdn-setup.sh</pre> ausgeführt werden.</li>
 				</ul>
 				<h4>Geplante &Auml;nderungen und 	Features für die nächste Version:</h4>
 				<ul>
-					<li>Eine <a href="http://www.cs.uni-sb.de/NMM" target="_parent">NMM</a> Version,
-						die die <a href="http://www.cs.uni-sb.de/NMMStatus/MMBox/index.html" target="_parent">MMBox</a>
+					<li>Eine <a href="http://graphics.cs.uni-sb.de/NMM/" target="_parent">NMM</a> Version,
+						die die <a href="http://graphics.cs.uni-sb.de/NMM/Status/MMBox/index.html" target="_parent">MMBox</a>
 						startet: Verwandelt den PC in ein Netzwerk-taugliches Multimedia Home-Entertainment Center!</li>
-					<li>...</li>
+					<li>Diskettensicherung von Konfigurationsdateien (eventuell auch Harddisk- und USB-Stick-Sicherung)</li>
 				</ul>
 				<h4>Was jollix irgendwann mal k&ouml;nnen soll:</h4>
 				<ul>
