@@ -5,7 +5,7 @@
 # for jollix <www.jollix.de>
 # location in cloop: /etc/init.d/local
 # Distributed under the terms of the GNU General Public License, v2 or later
-# $Header: /home/xubuntu/berlios_backup/github/tmp-cvs/jollix/Repository/jollix/skripte/local,v 1.11 2003/10/09 17:59:51 knochen Exp $
+# $Header: /home/xubuntu/berlios_backup/github/tmp-cvs/jollix/Repository/jollix/skripte/local,v 1.12 2003/10/09 18:25:56 knochen Exp $
 
 HILITE="\033[1m"
 NORMAL="\033[0m"
@@ -57,7 +57,7 @@ start() {
 	eend
 	
         #modules-jollix, laden der Kernelmodule
-        /sbin/modules-jollix
+        /sbin/modules-jollix.sh
 
 	#Partitionen mounten
 	/sbin/transitmount
