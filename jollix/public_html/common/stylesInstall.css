@@ -1,0 +1,96 @@
+BODY {
+	color: black;
+	font-family: Verdana, Arial, Helvetica;
+	font-size: 1.0em;
+}
+
+.whitetext {
+	font-size: 0.9em;
+	font-family: Lucida Console, Courier;
+	color: #ffffff;
+}
+
+.redtext {
+	font-size: 0.9em;
+	font-family: Lucida Console, Courier;
+	color: #ff5454;
+	margin-left: 0.5em;
+}
+
+.greentext {
+	font-size: 0.9em;
+	font-family: Lucida Console, Courier;
+	color: #51f752;
+	margin-left: 0.5em;
+}
+
+.bluetext {
+	font-size: 0.9em;
+	font-family: Lucida Console, Courier;
+	/*color: #4549d7;*/
+	color: #5256ff;
+}
+
+.dochead {
+	margin-top: 1.5em;
+	font-size: 1.7em;
+	font-weight: bold;
+}
+
+.chaphead {
+/*	margin: 1.2em 14% 0.5em 3%;  */
+	font-size: 1.3em;
+	font-weight: bold;
+}
+
+.chapnum {
+	font-size: 0.8em;
+}
+
+.infohead {
+	font-size: 0.8em;
+	font-family: Verdana, Arial, Helvetica;
+	padding-top: 0.2em;
+	padding-bottom: 0.2em;
+	padding-left: 1.0em;
+	margin-left: 1.0em;
+	color: #000000;
+	font-weight: bold;
+}
+
+.ntable {
+	padding: 0em;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.path {
+	font-family: Lucida Console, Courier;
+	font-size: 0.9em;
+    color: #5256ff;
+}
+
+.shell {
+	font-family: Lucida Console, Courier;
+	font-size: 1.0em;
+}
+
+P.note {
+	padding: 0.5em;
+}
+
+.ncontent {
+	/*content with no padding, for an ugly Netscape 4.7 compatibility hack*/
+	padding: 0em;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	font-family: Verdana, Arial, Helvetica;
+	font-size: 0.9em;
+}
+
+PRE {
+	padding: 0.5em;
+	font-family: Lucida Console, Courier;
+	color: #000000;
+	font-size: 1.0em;
+}
