@@ -1,21 +1,23 @@
 #!/bin/sh
-#               ####   csanleg   ####
-# creates a desktop shortcut to Counter-Strike executable
-# location in cloop: /usr/bin/csanleg
+#               ####   hlinstall   ####
+# creates a desktop shortcut to Half-Life and/or HL-mod executables
+# creates links to Half-Life installation in RAM
+# location in livecd.cloop: /usr/bin/hlinstall
 
 # global variables ############################################################
-linkdir="/home/user/Half-Life/"
+homedir="/home/user"
+linkdir="$homedir/Half-Life/"
 installdir="/mnt/partitions"
 searchdir=$installdir
 subdirs=""
 gamename="Half-Life"
 gameexe="hl.exe"
-desktopentry="winex -- ${gameexe} -game cstrike -console"
+modnames=""
+selected_mods=""
 
 # Prepare the fake Half-Life directory in /home/user ##########################
 prepare_halflife() {
-    if [ -d $linkdir ]
-	then
+    if [ -d $linkdir ] ; then
 	cd $linkdir
 	rm -rf *
     else
@@ -24,48 +26,78 @@ prepare_halflife() {
     cd $linkdir
 }
 
-# Select direct installation or via Half-Life #################################
+# Select Half-Life mods to create desktop icons for ###########################
+select_mods() {
+    local mods
+    mods=`Xdialog --stdout --title "Mods auswaehlen" --checklist "Fuer welche Half-Life Mods sollen\nDesktop-Symbole angelegt werden?" 15 35 10 1 "Half-Life (kein Mod)" off 2 "Counter-Strike" on 3 "Public-Enemy" on`
+    case $mods in 
+	1)
+	    selected_mods="HalfLife" ;;
+	2)
+	    selected_mods="CounterStrike" ;;
+	3)
+	    selected_mods="PublicEnemy" ;;
+	1/2)
+	    selected_mods="HalfLife ConterStrike" ;;
+	1/3)
+	    selected_mods="HalfLife PublicEnemy" ;;
+	2/3)
+	    selected_mods="CounterStrike PublicEnemy" ;;
+	1/2/3)
+	    selected_mods="HalfLife CounterStrike PublicEnemy" ;;
+    esac
+    # put error handling here
+}
+
+# Select installation (Counter-Strike or Half-Life) ###########################
 select_install() {
     local hl_install
-    hl_install=`Xdialog --stdout --title "Half-Life oder Counter-Strike?" --radiolist "Conter-Strike direkt oder\nueber eine Half-Life Installation aufrufen?" 16 40 25 1 "Half-Life (hl.exe -game cstrike)" on 2 "Counter-Strike (cstrike.exe)" off`
+    hl_install=`Xdialog --stdout --title "Half-Life oder Counter-Strike?" --radiolist "Einrichtung über eine Counter-Strike oder\n eine Half-Life Installation?" 16 45 25 1 "Half-Life (hl.exe -game MOD)" on 2 "Counter-Strike (cstrike.exe -game MOD)" off`
     case $hl_install in
 	1)
 	    gamename="Half-Life"
-	    gameexe="hl.exe"
-	    desktopentry="winex -- ${gameexe} -game cstrike -console"
-	    ;;
+	    gameexe="hl.exe" ;;
 	2)
 	    gamename="Counter-Strike"
-	    gameexe="cstrike.exe"
-	    desktopentry="winex -- ${gameexe} -console"
-	    ;;
+	    gameexe="cstrike.exe" ;;
     esac
 }
-# Create Desktop Shortcut #####################################################
-create_shortcut() {
-    csproceed=1
-    while [ $csproceed == 1 ]  
-      do
-      installdir=`Xdialog --stdout --cancel-label "Abbrechen" --title "$gamename Ordner angeben, in dem sich ("$gameexe") befindet" --fselect $searchdir 45 90`
-      cspath_exit=$?
-      case $cspath_exit in
-	  0) # All OK. The $installldir variable holds everything entered/choosed by the user.
-	      if [ -d ${installdir} ] 
-		  then 
-		  if [ -f ${installdir}${gameexe} ]
-		      then
-		      cat >>/home/user/.CounterStrike.desktop <<EOF
+
+# Create desktop shortcuts ####################################################
+create_shortcuts() {
+    local proceed=1
+    local modpath_exit
+    local gameoption
+    while [ $proceed == 1 ] ; do
+	installdir=`Xdialog --stdout --cancel-label "Abbrechen" --title "$gamename Ordner angeben, in dem sich ("$gameexe") befindet" --fselect $searchdir 45 90`
+	modpath_exit=$?
+	case $modpath_exit in
+	    0) # All OK. The $installldir variable holds everything entered/choosed by the user.
+		if [ -d ${installdir} ] ; then 
+		    if [ -f ${installdir}${gameexe} ] ; then
+			if [ ! -z "$selected_mods" ] ; then
+			  # create all icons
+			    for mymod in $selected_mods ; do
+				case $mymod in
+				    HalfLife)
+					gameoption="" ;;
+				    CounterStrike)
+					gameoption=" -game cstrike" ;;
+				    PublicEnemy)
+					gameoption=" -game penemy" ;;
+				esac
+				cat >>$homedir/.$mymod.desktop <<EOF
 [Desktop Entry]
 Comment=
 Comment[de]=
 Encoding=UTF-8
-Exec=$desktopentry
+Exec="winex -- ${gameexe} $gameoption -console"
 GenericName=
 GenericName[de]=
-Icon=/home/user/.kde3.1/share/icons/cstrike.xpm
+Icon=$homedir/.kde3.1/share/icons/$mymod.xpm
 MimeType=
-Name=CounterStrike
-Name[de]=CounterStrike
+Name=$mymod
+Name[de]=$mymod
 Path=$linkdir
 ServiceTypes=
 SwallowExec=
@@ -76,99 +108,89 @@ Type=Application
 X-KDE-SubstituteUID=false
 X-KDE-Username=
 EOF
-		      csproceed=0
-		  else 
-		      Xdialog --stdout --title "Fehler" --infobox "Konnte die Datei \"${gameexe}\" in\n $installdir\n nicht finden. Bitte das korrekte Verzeichnis angeben oder abbrechen." 10 60 9999
-		      csproceed=1
-		  fi
-	      else
-		  Xdialog --stdout --title "Error" --infobox "Kein Verzeichnis angegeben.\n Bitte das korrekte Verzeichnis angeben oder abbrechen." 10 60 9999
-		  csproceed=1
-	      fi
-	      ;;
-	  1) # Cancel/No pressed.
-	      csproceed=0
-	      ;;
-	  255) # An error occured or the box was closed.
-	      csproceed=0
-	      ;;
-      esac
+			    done
+			else
+			    exit
+			fi
+			proceed=0
+		    else 
+			Xdialog --stdout --title "Fehler" --infobox "Konnte die Datei \"${gameexe}\" in\n $installdir\n nicht finden. Bitte das korrekte Verzeichnis angeben oder abbrechen." 10 60 9999
+			proceed=1
+		    fi
+		else
+		    Xdialog --stdout --title "Fehler" --infobox "Kein Verzeichnis angegeben.\n Bitte das korrekte Verzeichnis angeben oder abbrechen." 10 60 9999
+		    proceed=1
+		fi ;;
+	    1) # Cancel/No pressed.
+		proceed=0 ;;
+	    255) # An error occured or the box was closed.
+		proceed=0 ;;
+	esac
     done
-    
+    Xdialog --title "ACHTUNG" --ok-label "Verknuepfung jetzt anlegen" --msgbox  "Bitte etwas Geduld.\nDas Anlegen der Desktop-Verknuepfung nimmt etwas Zeit in Anspruch." 10 60
 }
 
 # get sub directories from $1 #################################################
 get_sub_dirs() {
-    # $1 is the current working directory 
-    local myfile=""
-    local filetype=""
-    local allstrings=""
-    local mytype=""
+    # $1 is an absolute path to a (sub)directory HL is installed in
     subdirs=""
-    # search for all directories in current directory
-    for myfile in $(ls -1 ${1})
-      do
-      filetype=`file -b ${1}${myfile}`
-      for allstrings in $filetype
-	do
-	mytype=$allstrings
-      done
-      if [ $mytype = "directory" ]
-	  then
-	  subdirs="$subdirs $myfile"
-      fi
+    # search for all subdirectories in current directory
+    for mydir in `ls -1 $1` ; do
+	if [ -d "$1$mydir" ] ; then 
+	    subdirs="$subdirs $mydir"
+	fi
     done
 }
 
 # create symbolic links in a fake Half-Life directory #########################
 # and its subdirectories recursively. (creates real subdirectories!) ##########
 create_symlinks() {
-    # $1 is the current working directory 
+    # $1 is an abolute path to a (sub)directory HL is installed in
     local mysubdir=""
-    local myfile=""
-    local filetype=""
-    local mytype=""
-    local allstrings=""
 
     # create any subdirectories and do recursion
     get_sub_dirs $1
-    if [ ! -z "$subdirs" ]
-	then
+    if [ ! -z "$subdirs" ] ; then
 	mkdir $subdirs
 	local mysubdirs=$subdirs
 	subdirs=""
         # enter recursion(s)
-	for mysubdir in $mysubdirs
-	  do
-	  cd $mysubdir
-	  create_symlinks $1$mysubdir/
-	  cd ..
+	for mysubdir in $mysubdirs ; do
+	    cd $mysubdir
+	    create_symlinks $1$mysubdir/
+	    cd ..
 	done
     fi
-
-    # create the symlinks in this directory ($1)
-    for myfile in $(ls -1 ${1})
-      do
-      filetype=`file -b ${1}${myfile}`
-      for allstrings in $filetype
-	do
-	mytype=$allstrings
-      done
-      if [ $mytype != "directory" ]
-	  then
-	  ln -s ${1}${myfile}
-      fi
+    
+    # create the symlinks to $1$myfile
+    ls -1 $1 | while read myfile ; do
+	if [ ! -d "$1$myfile" ] ; then
+	    case $myfile in
+		*.cfg)
+		    cp $1$myfile . ;;
+		*)
+		    ln -s "$1$myfile" ;;
+	    esac
+	fi
     done
 }
 
+# finish installation #########################################################
+finish_install() {
+    for mymod in $selected_mods
+      do
+      mv $homedir/.$mymod.desktop $homedir/Desktop/$mymod.desktop
+    done
+    Xdialog --title "Erfolg" --msgbox "Vorgang erfolgreich abgeschlossen.\n Verknuepfung angelegt." 10 60
+}
 
 ## MAIN #######################################################################
 prepare_halflife
+select_mods
 select_install
-create_shortcut
-# now there's an executable shortcut to Half-life or a HL-mod
-Xdialog --title "ACHTUNG" --ok-label "Verknuepfung jetzt anlegen" --msgbox  "Bitte etwas Geduld.\nDas Anlegen der Desktop-Verknuepfung nimmt etwas Zeit in Anspruch." 10 60
+create_shortcuts
+# now there's an executable shortcut to Half-life and/or HL mod(s)
 create_symlinks $installdir
-mv /home/user/.CounterStrike.desktop /home/user/Desktop/CounterStrike.desktop
-Xdialog --title "Erfolg" --msgbox "Vorgang erfolgreich abgeschlossen.\n Verknuepfung angelegt." 10 60
+finish_install
+
 exit 0
