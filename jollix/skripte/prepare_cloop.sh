@@ -17,6 +17,8 @@ rm -fr ${JOLLIX_DIR}/root/.*
 rm -fr ${JOLLIX_DIR}/root/Desktop
 rm -f ${JOLLIX_DIR}/etc/atigamer
 rm -f ${JOLLIX_DIR}/home/user/.bash_history
+chown -R user ${JOLLIX_DIR}/home/user
+chgrp -R users ${JOLLIX_DIR}/home/user
 #cd ${JOLLIX_DIR}/usr/src/linux/
 #make clean
 
@@ -84,8 +86,11 @@ echo " chroot /mnt/hdd/data/jollix-home/jollix-work/jollix02 /bin/bash"
 echo " env-update"
 echo " source /etc/profile"
 echo " opengl-update nvidia"
+echo " rm_ /etc/ati"
+echo " touch /etc/nvidia"
 echo " /etc/nvidia checken und evtl. /etc/ati löschen!"
 echo " rm_ -fr var/tmp var/cache"
 echo " rm_ -fr /root/.*"
 echo " .bash_history von user?"
+echo " logdateien löschen"
 echo " exit"

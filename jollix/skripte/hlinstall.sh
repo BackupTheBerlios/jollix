@@ -103,9 +103,9 @@ select_cd() {
 				cdeath=0 ;;
 		esac
 	done
-
-    1)
-    	cdeath=0 ;;
+	;;
+        1)
+	cdeath=0 ;;
     esac
     echo $cdeath
 }
