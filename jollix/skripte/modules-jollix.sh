@@ -51,7 +51,7 @@ fi
 #    done
 #fi
 
-local CMDLINE="`cat /proc/cmdline`"
+CMDLINE="`cat /proc/cmdline`"
 	for x in $CMDLINE
 	do
 		if [ "$x" = "vesa" ]
