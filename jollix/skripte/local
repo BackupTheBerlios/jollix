@@ -3,8 +3,9 @@
 # Modified by Oliver Schwinn <patteh@web.de>
 # and Jochen Spang <knochestolle@web.de>
 # for jollix <www.jollix.de>
+# location in cloop: /etc/init.d/local
 # Distributed under the terms of the GNU General Public License, v2 or later
-# $Header: /home/xubuntu/berlios_backup/github/tmp-cvs/jollix/Repository/jollix/skripte/local,v 1.6 2003/03/12 17:09:27 knochen Exp $
+# $Header: /home/xubuntu/berlios_backup/github/tmp-cvs/jollix/Repository/jollix/skripte/local,v 1.7 2003/04/15 12:59:45 patteh Exp $
 
 HILITE="\033[1m"
 NORMAL="\033[0m"
@@ -54,6 +55,7 @@ start() {
 	
         #modules-jollix, laden der Kernelmodule
         /sbin/modules-jollix
+	/sbin/transitmount
 
 }
 
