@@ -155,7 +155,7 @@ sub dbgmsg2 {
 # (i.e. not the name the kernel knowns about, mentioned in
 # /proc/partitions), mounting the filesystem under this strange name,
 # then run transitmount. Both transitmount and fsck will fail to
-# notice that the filesystem is already mounted. 
+# notice that the filesystem is already mounted.
 
 # This may happen if you untarred the content of an old /dev with
 # non-standard names into the devfs, for example.  Perhaps we should
@@ -461,7 +461,7 @@ foreach $shortdevice (@handle) {
 	# Ok, let's extract volume label
 	print "Reading ".$filesystemtype." volume label on $device\n" if ($debug);
 	@wouldbelabel=readpipe "e2label $device"; #Does this call the shell, or a exec ? man perlfunc says "EXPR is executed as a system command", and if no metacharacter is present, an exec is done, without any shell...
-	
+
 	$alabel=pop @wouldbelabel;
 	chomp $alabel;
 	if (pop @wouldbelabel) {
@@ -475,21 +475,21 @@ foreach $shortdevice (@handle) {
 		    printf "  has an empty ".$filesystemtype."fs volume label ? : ".$alabel."\n" if ($verbose);
 		}
 	    }
-	print "  Let's fsck.".$filesystemtype." $device, to be sure...\n";
+	#print "  Let's fsck.".$filesystemtype." $device, to be sure...\n";
 
-	@args = ("fsck.".$filesystemtype, "-p", "-C", "0", $device);
-	$fsckrc=system(@args);
-	if (($fsckrc >= 4*256) || ($fsckrc & 255)) {
-	    warn "   Hum, the filesystem is possibly not clean...: $?\n   We'll mount it anyway, but maybe we shouldn't...";
-	}
+	#@args = ("fsck.".$filesystemtype, "-p", "-C", "0", $device);
+	#$fsckrc=system(@args);
+	#if (($fsckrc >= 4*256) || ($fsckrc & 255)) {
+	#    warn "   Hum, the filesystem is possibly not clean...: $?\n   We'll mount   #it anyway, but maybe we shouldn't...";
+#	}
     } else {
 	# If file type is ext2, we may look for a soft label anyway. For now, we don't.
 	print "Pre-mounting $device read-only to check for a \"soft\" volume label.\n" if ($debug);
-	
+
 	mkdir $tempmountpoint;
-	
+
 	@args = ("mount", $device, $tempmountpoint);
-	
+
 	if (@mount_options) {
 #	printf "There are mount options for this filesystem : @{@mount_options}\n";
 	    
