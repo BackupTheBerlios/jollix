@@ -1,7 +1,7 @@
 #!/bin/sh
 #                 ### mousewheel-setup.sh ###
 #
-# location in cloop: /usr/bin/mousewheel-setup.sh
+# location in cloop: /sbin/mousewheel-setup.sh
 
 Xdialog --title "Mausrad (de)aktivieren" --msgbox "Achtung!\nWenn die Mausradunterstützung eingeschaltet wird,\nkann es unter Umständen zu Fehlfunktionen\nbei Logitech Mäusen kommen!!!" 10 45 
 Xdialog --title "Mausrad (de)aktivieren" --yesno "Mausradunterstützung einschalten?\n\"Nein\" deaktiviert die Mausradfunktion" 8 43  

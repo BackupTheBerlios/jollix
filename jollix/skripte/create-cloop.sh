@@ -5,19 +5,20 @@
 #  that contains the jollix system.
 #  Use as root from cvsroot/jollix directory 
 
-# hackattack! Avoids checkfs error on startup.
-# Be aware of what you're doing else when date is set 
-# do this value and create-cloop is running!
-date 010100002005
-
 source skripte/settings
+
+# 1.
 install -d looproot
-dd if=/dev/zero of=livecd.loop bs=1k count=1500000
+dd if=/dev/zero of=livecd.loop bs=1k count=1800000
 mke2fs -F -q livecd.loop
 mount -t ext2 -o loop livecd.loop looproot 
-cp -dR ${JOLLIX_DIR}/* looproot --preserve=mode --preserve=ownership 
-#cp -dpR ${JOLLIX_DIR}/* looproot
+cp -a ${JOLLIX_DIR}/* looproot
+
+# 1.5 
+sleep 3
+
+# 2.
 umount looproot
 cat livecd.loop | ${CLOOP_DIR}/create_compressed_ucl_fs - 131072 > ${LIVECD_DIR}/livecd.cloop
-rm -rf looproot livecd.loop
+rm -fr looproot livecd.loop
 
