@@ -11,6 +11,8 @@ create-cloop	-- creates the compressed loopback archive	(EXTERN)
 create-initrd	-- creates the initial ramdisk 			(EXTERN)
 create-iso	-- creates the jollix iso			(EXTERN)
 csanleg		-- creates desktop icon to play Counter-Strike	(INTERN)
+files.lst	-- this file
+fstab		-- /etc/fstab in jollix				(INTERN)
 local		-- /etc/init.d/local startup script		(INTERN)
 lss16toppm	-- converts lss to ppm 16 bit image		(EXTERN)
 modules-jollix	-- loads all possible kernel modules		(INTERN)
