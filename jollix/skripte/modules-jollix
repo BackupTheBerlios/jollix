@@ -22,6 +22,12 @@ for module in $(lsmod) ; do
   fi
 done
 
+for module in $(lsmod) ; do
+  if [ "$module" = "usbcore" ] ; then
+   modprobe hid
+  fi
+done
+
 #Alsa unmuten
 amixer set Master 100 unmute
 amixer set PCM 100 unmute
