@@ -778,11 +778,11 @@ initrd=/boot/initrd-1024x768
 <p class="note"><b>Erweiterte grub.conf mit Windows in der 1. Partition (hda1) und der jollix boot Partition in der 2. Partition (hda2):</b></p>
 <pre>default 0
 timeout 30
-splashimage=(hd0,0)/boot/grub/splash.xpm.gz
+splashimage=(hd0,1)/boot/grub/splash.xpm.gz
 
 title=jollix starten
-root (hd0,0)
-kernel (hd0,0)/boot/vmlinuz-2.4.20-gaming-r3 root=/dev/hda3 splash=silent video=vesa:ywrap,mtrr vga=0x317
+root (hd0,1)
+kernel (hd0,1)/boot/vmlinuz-2.4.20-gaming-r3 root=/dev/hda4 splash=silent video=vesa:ywrap,mtrr vga=0x317
 initrd=/boot/initrd-1024x768
 
 title=Windows XP
