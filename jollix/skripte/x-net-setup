@@ -1,5 +1,10 @@
-#!/bin/bash
-
+#!/bin/sh
+#                 ### x-net-setup ###
+#
+# The script is called by x-net-setup-sudo to set up the network.
+# Currently the user has to be in a Ethernet LAN. 
+# The network device is configuerd manually or by dhcp server.
+# location in cloop: /usr/bin/x-net-setup
 
 [ ! -d /tmp/setup.opts ] && mkdir /tmp/setup.opts
 cd /tmp/setup.opts
@@ -31,11 +36,11 @@ case $mynetsel in
 	oncancel `cat ${1}.GW`
 	Xdialog --title "DNS Server" --inputbox "Bitte Name Server angeben ('Enter' fuer keinen:)" 20 50 2> ${1}.NS
 	oncancel `cat ${1}.NS`
-	/sbin/ifconfig $1 `cat ${1}.IP` broadcast `cat ${1}.B` netmask `cat ${1}.NM`
+	/sbin/ifconfig `cat ${1}.IF` `cat ${1}.IP` broadcast `cat ${1}.B` netmask `cat ${1}.NM`
 	myroute=`cat ${1}.GW`
 	if [ "$myroute" != "" ]
 	    then
-	    /sbin/route add default gw $myroute dev $1 netmask 0.0.0.0 metric 1	
+	    /sbin/route add default gw $myroute dev `cat ${1}.IF` netmask 0.0.0.0 metric 1	
 	fi
 	cp /etc/resolv.conf /etc/resolv.conf.orig
 	myns="`cat ${1}.NS`"
