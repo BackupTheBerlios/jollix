@@ -1,0 +1,23 @@
+# aus der KNOPPIX-FAQ (http://download.linuxtag.org/knoppix/KNOPPIX-FAQ.txt)
+
+F: Kann man die Distribution von der CD auch auf Festplatte installieren?
+
+A: Im Prinzip ja (das "Master"-System läuft schließlich auch von
+Festplatte, bevor es auf CD gebrannt wird). Allerdings gibt es derzeit
+noch kein Installations-GUI dafür, und die Festinstallation ist eher
+fortgeschrittenen Linux-Anwendern zu empfehlen. Sie läuft in etwa nach
+folgendem Schema ab, ein gebootetes KNOPPIX-System vorausgesetzt:
+1.) ext2-Dateisystem auf einer freien Partition einrichten und
+    z.B. nach /mnt/knoppix mounten.
+2.) cp -a /KNOPPIX/* /mnt/knoppix/
+3.) /mnt/knoppix/etc/fstab und /mnt/knoppix/etc/lilo.conf auf das neue
+    System anpassen (Achtung: Symlinks in /boot zeigen evtl. auf die
+    Ramdisk!), lilo aufrufen.
+4.) mkdir /mnt/knoppix/home/knoppix && \ 
+    chown knoppix.knoppix /mnt/knoppix/home/knoppix
+5.) Reboot, ausprobieren, fehlende Einstellungen ergänzen.
+(Keine Garantie.)
+Auf neueren Versionen von KNOPPIX ab 3.1 ist unter
+/usr/local/bin/knx-hdinstall
+ein Skript mit dabei, das aus KNOPPIX eine "normale" Debian-Installation
+auf Festplatte erzeugt. Benutzung auf eigene Gefahr!
