@@ -1,10 +1,10 @@
 #!/bin/sh
-#                 ### x-net-setup ###
+#                 ### x-net-setup.sh ###
 #
 # The script is called by x-net-setup-sudo to set up the network.
 # Currently the user has to be in a Ethernet LAN. 
 # The network device is configuerd manually or by dhcp server.
-# location in cloop: /usr/bin/x-net-setup
+# location in cloop: /usr/bin/x-net-setup.sh
 
 [ ! -d /tmp/setup.opts ] && mkdir /tmp/setup.opts
 cd /tmp/setup.opts
@@ -34,7 +34,7 @@ case $mynetsel in
 	oncancel `cat ${1}.NM`
 	Xdialog --title "Gateway" --inputbox "Bitte Gateway angeben fuer $myiface ('Enter' fuer keinen:)" 20 50 2> ${1}.GW
 	oncancel `cat ${1}.GW`
-	Xdialog --title "DNS Server" --inputbox "Bitte Name Server angeben ('Enter' fuer keinen:)" 20 50 2> ${1}.NS
+	Xdialog --title "DNS Server" --inputbox "Bitte Domain Name Server (DNS) angeben\n(Default ist 192.168.0.1)\n\nMehrere DNS-Server können durch ein Leerzeichen\nvoneinander getrennt angegeben werden.\nz.B. \"194.25.2.129 194.25.0.125\"" 20 50 2> ${1}.NS
 	oncancel `cat ${1}.NS`
 	/sbin/ifconfig `cat ${1}.IF` `cat ${1}.IP` broadcast `cat ${1}.B` netmask `cat ${1}.NM`
 	myroute=`cat ${1}.GW`
@@ -42,14 +42,15 @@ case $mynetsel in
 	    then
 	    /sbin/route add default gw $myroute dev `cat ${1}.IF` netmask 0.0.0.0 metric 1	
 	fi
-	cp /etc/resolv.conf /etc/resolv.conf.orig
 	myns="`cat ${1}.NS`"
-	if [ "$myns" = "" ]
-	    then
-	    : > /etc/resolv.conf
-	else
-	    sed -e "s:##NS1##:${myns}:" /etc/resolv.conf.orig > /etc/resolv.conf
+	if [ -e /etc/resolv.conf ] ; then
+	    rm /etc/resolv.conf
 	fi
+	for dns in $myns ; do
+	    cat >>/etc/resolv.conf <<EOF
+nameserver $dns
+EOF
+	done
 	;;
 esac
 #Xdialog --infobox "Tippen Sie \"ifconfig\" um sicher zu gehen,\ndass das Netzwerk richtig konfiguriert wurde." 10 40 9999
