@@ -1,0 +1,15 @@
+Bootoptionen:
+
+install	   Bootet die CD, um jollix auf der ersten Festplatte zu installieren.
+local	   Bootet das Betriebsystem auf der Festplatte, falls vorhanden.
+
+lang=us	   Stellt auf US-englische Sprache und Tastaturbelegung um (Normaler-
+	   weise wird mit deutscher Tastaturbelegung und Sprache gebootet)
+noapic	   deaktiviert die Unterstuetzung fuer Advanced Programmable Interrupt
+	   Controller, die auf einigen Systemen Probleme machen (v.a. Laptops)
+noscsi     deaktiviert die automatische Erkennung von SCSI-Geraeten
+nonet	   deaktiviert die automatische Erkennung von Netzwerkkarten (Ethernet)
+acpi=no    "Advanced Configuration and Power Interface". Falls Probleme beim
+	   Booten auftreten, kann versucht werden, ACPI zu deaktivieren.
+
+wheelmouse IMPS/2-kompatible Radmaus verwenden (!?)
