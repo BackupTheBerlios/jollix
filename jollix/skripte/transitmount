@@ -36,8 +36,8 @@
 # Even unix-style filesystems will be mounted "nosuid,nodev" because they
 # are not trusted by default.
 		    "ext2" => [ '-o', 'ro,nodev,nosuid'],
-		    "ext3" => [ '-o', 'nodev,nosuid'],
-		    "minix" => [ '-o', 'nodev,nosuid'],
+		    "ext3" => [ '-o', 'ro,nodev,nosuid'],
+		    "minix" => [ '-o', 'ro,nodev,nosuid'],
                     "x86" => [ '-o', 'ro,uid=user'],
 		    "NTFS" => [ '-o', 'ro,uid=user'],
 

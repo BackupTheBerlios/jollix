@@ -1,0 +1,174 @@
+#!/bin/sh
+#               ####   csanleg   ####
+# creates a desktop shortcut to Counter-Strike executable
+# location in cloop: /usr/bin/csanleg
+
+# global variables ############################################################
+linkdir="/home/user/Half-Life/"
+installdir="/mnt/partitions"
+searchdir=$installdir
+subdirs=""
+gamename="Half-Life"
+gameexe="hl.exe"
+desktopentry="winex -- ${gameexe} -game cstrike -console"
+
+# Prepare the fake Half-Life directory in /home/user ##########################
+prepare_halflife() {
+    if [ -d $linkdir ]
+	then
+	cd $linkdir
+	rm -rf *
+    else
+	mkdir $linkdir
+    fi
+    cd $linkdir
+}
+
+# Select direct installation or via Half-Life #################################
+select_install() {
+    local hl_install
+    hl_install=`Xdialog --stdout --title "Half-Life oder Counter-Strike?" --radiolist "Conter-Strike direkt oder\nueber eine Half-Life Installation aufrufen?" 16 40 25 1 "Half-Life (hl.exe -game cstrike)" on 2 "Counter-Strike (cstrike.exe)" off`
+    case $hl_install in
+	1)
+	    gamename="Half-Life"
+	    gameexe="hl.exe"
+	    desktopentry="winex -- ${gameexe} -game cstrike -console"
+	    ;;
+	2)
+	    gamename="Counter-Strike"
+	    gameexe="cstrike.exe"
+	    desktopentry="winex -- ${gameexe} -console"
+	    ;;
+    esac
+}
+# Create Desktop Shortcut #####################################################
+create_shortcut() {
+    csproceed=1
+    while [ $csproceed == 1 ]  
+      do
+      installdir=`Xdialog --stdout --cancel-label "Abbrechen" --title "$gamename Ordner angeben, in dem sich ("$gameexe") befindet" --fselect $searchdir 45 90`
+      cspath_exit=$?
+      case $cspath_exit in
+	  0) # All OK. The $installldir variable holds everything entered/choosed by the user.
+	      if [ -d ${installdir} ] 
+		  then 
+		  if [ -f ${installdir}${gameexe} ]
+		      then
+		      cat >>/home/user/.CounterStrike.desktop <<EOF
+[Desktop Entry]
+Comment=
+Comment[de]=
+Encoding=UTF-8
+Exec=$desktopentry
+GenericName=
+GenericName[de]=
+Icon=/home/user/.kde3.1/share/icons/cstrike.xpm
+MimeType=
+Name=CounterStrike
+Name[de]=CounterStrike
+Path=$linkdir
+ServiceTypes=
+SwallowExec=
+SwallowTitle=
+Terminal=false
+TerminalOptions=
+Type=Application
+X-KDE-SubstituteUID=false
+X-KDE-Username=
+EOF
+		      csproceed=0
+		  else 
+		      Xdialog --stdout --title "Fehler" --infobox "Konnte die Datei \"${gameexe}\" in\n $installdir\n nicht finden. Bitte das korrekte Verzeichnis angeben oder abbrechen." 10 60 9999
+		      csproceed=1
+		  fi
+	      else
+		  Xdialog --stdout --title "Error" --infobox "Kein Verzeichnis angegeben.\n Bitte das korrekte Verzeichnis angeben oder abbrechen." 10 60 9999
+		  csproceed=1
+	      fi
+	      ;;
+	  1) # Cancel/No pressed.
+	      csproceed=0
+	      ;;
+	  255) # An error occured or the box was closed.
+	      csproceed=0
+	      ;;
+      esac
+    done
+    
+}
+
+# get sub directories from $1 #################################################
+get_sub_dirs() {
+    # $1 is the current working directory 
+    local myfile=""
+    local filetype=""
+    local allstrings=""
+    local mytype=""
+    subdirs=""
+    # search for all directories in current directory
+    for myfile in $(ls -1 ${1})
+      do
+      filetype=`file -b ${1}${myfile}`
+      for allstrings in $filetype
+	do
+	mytype=$allstrings
+      done
+      if [ $mytype = "directory" ]
+	  then
+	  subdirs="$subdirs $myfile"
+      fi
+    done
+}
+
+# create symbolic links in a fake Half-Life directory #########################
+# and its subdirectories recursively. (creates real subdirectories!) ##########
+create_symlinks() {
+    # $1 is the current working directory 
+    local mysubdir=""
+    local myfile=""
+    local filetype=""
+    local mytype=""
+    local allstrings=""
+
+    # create any subdirectories and do recursion
+    get_sub_dirs $1
+    if [ ! -z "$subdirs" ]
+	then
+	mkdir $subdirs
+	local mysubdirs=$subdirs
+	subdirs=""
+        # enter recursion(s)
+	for mysubdir in $mysubdirs
+	  do
+	  cd $mysubdir
+	  create_symlinks $1$mysubdir/
+	  cd ..
+	done
+    fi
+
+    # create the symlinks in this directory ($1)
+    for myfile in $(ls -1 ${1})
+      do
+      filetype=`file -b ${1}${myfile}`
+      for allstrings in $filetype
+	do
+	mytype=$allstrings
+      done
+      if [ $mytype != "directory" ]
+	  then
+	  ln -s ${1}${myfile}
+      fi
+    done
+}
+
+
+## MAIN #######################################################################
+prepare_halflife
+select_install
+create_shortcut
+# now there's an executable shortcut to Half-life or a HL-mod
+Xdialog --title "ACHTUNG" --ok-label "Verknuepfung jetzt anlegen" --msgbox  "Bitte etwas Geduld.\nDas Anlegen der Desktop-Verknuepfung nimmt etwas Zeit in Anspruch." 10 60
+create_symlinks $installdir
+mv /home/user/.CounterStrike.desktop /home/user/Desktop/CounterStrike.desktop
+Xdialog --title "Erfolg" --msgbox "Vorgang erfolgreich abgeschlossen.\n Verknuepfung angelegt." 10 60
+exit 0
