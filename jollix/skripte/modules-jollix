@@ -3,19 +3,35 @@
 # Copyright 2003 jollix
 # Jochen Spang <knochestolle@web.de>
 # Oliver Schwinn <patteh@web.de> 
+# location in cloop: /sbin/modules-jollix
 # Distributed under the terms of the GNU General Public License, v2 or later
 
-#alle Module laden
+# load all modules
 for module in $(pcimodules) ; do
        modprobe -s -k "$module"
 done
 
-#nVidia GK vorhanden, dann agpgart entfernen
+# if nVidia GK, remove agpgart 
 #for module in $(lsmod) ; do
 #  if [ "$module" = "NVdriver" ] ; then
 #   rmmod agpgart
 #  fi 
 #done
+
+nvidiafound=0
+for module in $(lsmod) ; do
+  if [ "$module" = "NVdriver" ] ; then
+   nvidiafound=1
+  fi
+done
+
+if [ $nvidiafound = 0 ] ; then
+  cp /etc/X11/XF86Config-vesa /etc/X11/XF86Config
+   else
+     cp /etc/X11/XF86Config-nvidia /etc/X11/XF86Config
+fi
+
+
 
 for module in $(lsmod) ; do
   if [ "$module" = "snd" ] ; then
@@ -33,9 +49,8 @@ done
 amixer set Master 100 unmute
 amixer set PCM 100 unmute
 
-#USB PS/2 Maus Konfiguration
-
-#Warten bis usb/devices angelegt ist
+# USB PS/2 mouse configuration
+# wait 5 sec. for usb/devices to be created (hackattack!)
 
 raushier=true
 declare -i counter=0
