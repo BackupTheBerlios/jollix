@@ -8,7 +8,7 @@ Xdialog --title "ISDN Konfiguration" --inputbox "Benutzername beim Provider (T-O
 username=`cat ${1}.1`
 Xdialog --title "ISDN Konfiguration" --passwordbox "Passwort eingeben" 8 45 2> ${1}.2
 password=`cat ${1}.2`
-Xdialog --title "ISDN Konfiguration" --passwordbox "Einwahlnummer eingeben" 8 45 2> ${1}.2
+Xdialog --title "ISDN Konfiguration" --inputbox "Einwahlnummer eingeben" 8 45 2> ${1}.2
 number=`cat ${1}.3`
 if [ -e /etc/ppp/peers/isdn/jollixISDN ] ; then
     rm /etc/ppp/peers/isdn/jollixISDN
