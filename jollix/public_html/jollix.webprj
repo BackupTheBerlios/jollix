@@ -1,0 +1,51 @@
+<!DOCTYPE webproject>
+<webproject>
+<project usePreviewPrefix="0" type="Local" previewPrefix="file:file%3A/" newfiles="-//w3c//dtd html 4.01 strict//en" name="jollix" encoding="iso 8859-1" >
+<upload/>
+<author>Oliver Schwinn</author>
+<email>patteh@web.de</email>
+<defaultDTD>-//w3c//dtd html 4.01 frameset//en</defaultDTD>
+<item url="index.html" />
+<item url="index.html" />
+<item url="common/" />
+<item url="de/" />
+<item url="en/" />
+<item url="img/" />
+<item url="img/download.jpg" />
+<item url="img/dokumentation.jpg" />
+<item url="img/features.jpg" />
+<item url="img/about.jpg" />
+<item url="img/news.jpg" />
+<item url="img/forum.jpg" />
+<item url="img/powered-by-gentoo.jpg" />
+<item url="img/screenshots.jpg" />
+<item url="img/pelogo.jpg" />
+<item url="img/english.gif" />
+<item modified_time="1066573667" url="common/styles.css" />
+<item url="de/de_home.html" />
+<templates>templates/</templates>
+<toolbars>toolbars/</toolbars>
+<item url="templates/" />
+<item url="templates/master_template.html" />
+<item url="de/de_about.html" />
+<item url="de/de_docu.html" />
+<item url="de/de_news.html" />
+<item url="de/de_features.html" />
+<item url="de/de_screenshots.html" />
+<item url="common/stylesInstall.css" />
+<item url="de/de_download.html" />
+<item url="img/Bildschirmphoto1.jpg" />
+<item url="img/Bildschirmphoto2.jpg" />
+<item url="img/Bildschirmphoto3.jpg" />
+<item url="img/Bildschirmphoto4.jpg" />
+<item url="templates/screenshot_template.html" />
+<item url="common/02screeni1.html" />
+<item url="common/02screeni2.html" />
+<item url="common/02screeni3.html" />
+<item url="common/02screeni4.html" />
+<item url="common/01screeni1.html" />
+<item url="common/01screeni2.html" />
+<item url="common/01screeni3.html" />
+<item url="common/01screeni4.html" />
+</project>
+</webproject>
