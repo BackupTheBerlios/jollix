@@ -91,7 +91,7 @@ create_shortcuts() {
 Comment=
 Comment[de]=
 Encoding=UTF-8
-Exec=winex -- ${gameexe} $gameoption -console
+Exec=winex -- ${gameexe}$gameoption -console
 GenericName=
 GenericName[de]=
 Icon=$homedir/.kde3.1/share/icons/$mymod.xpm
