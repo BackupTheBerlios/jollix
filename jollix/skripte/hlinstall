@@ -158,7 +158,7 @@ create_symlinks() {
 	for mysubdir in $mysubdirs ; do
 	    cd $mysubdir
 	    create_symlinks $1$mysubdir/
-	    cd ..
+ 	    cd ..
 	done
     fi
     

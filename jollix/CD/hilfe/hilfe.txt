@@ -1,42 +1,83 @@
-#####################################################################
-# jollix 0.1 Erste Schritte # http://www.jollix.de # 0.1 CS-Release #
-#####################################################################
+############################################################################
+# jollix 0.1.1 Erste Schritte # http://www.jollix.de # 0.1.1 PE/CS-Release #
+############################################################################
 
-0. Was ist jollix 0.1?
-Jollix ist eine einfach zu installierende und komplett freie Linux Distribution 
-für die x86 Architektur, die auf Gentoo   Linux basiert. Mit jollix soll 
-haupstächlich dem Gamer und Multimedia-Enthusiast der vollständige Umstieg
-von MS-Windows auf Linux erleichtert werden. Die Version 0.1 ist die erste
-Beta-Release zum Testen von Counterstrike unter Linux. Weitere Spiele und
-die Möglichkeit zur Installation auf Deiner Festplatte folgen.
+0. Was ist jollix 0.1.1?
+Jollix ist eine einfach zu installierende und komplett freie Linux Distribution
+für die x86 Architektur, die auf Gentoo Linux basiert. Mit jollix soll
+hauptsächlich dem Gamer und Multimedia-Enthusiast der vollständige Umstieg
+von MS-Windows auf Linux erleichtert werden. Die Version 0.1.1 ist die erste
+Beta-Release zum Testen von Public Enemy und Counterstrike unter Linux. 
+Weitere Spiele und die Möglichkeit zur Installation auf Deiner Festplatte 
+folgen.
 
-1.Bootoptionen:
-install	   Bootet die CD, um jollix auf der ersten Festplatte zu installieren.
-local	   Bootet das Betriebsystem auf der Festplatte, falls vorhanden.
-
-lang=us	   Stellt auf US-englische Sprache und Tastaturbelegung um (Normaler-
-	   weise wird mit deutscher Tastaturbelegung und Sprache gebootet)
-noapic	   deaktiviert die Unterstuetzung fuer Advanced Programmable Interrupt
-	   Controller, die auf einigen Systemen Probleme machen (v.a. Laptops)
-noscsi     deaktiviert die automatische Erkennung von SCSI-Geraeten
-nonet	   deaktiviert die automatische Erkennung von Netzwerkkarten (Ethernet)
-acpi=no    "Advanced Configuration and Power Interface". Falls Probleme beim
-	   Booten auftreten, kann versucht werden, ACPI zu deaktivieren.
-wheelmouse IMPS/2-kompatible Radmaus verwenden (!?)
-
-2. Netzwerk einrichten 
-Über Desktop-Button "Netzwerk einrichten" das lokale
-LAN-Netzwerk einrichten. eth0 bezeichnet die erste Netzwerkkarte im Rechner, 
+1. Netzwerk einrichten
+Über den Desktop-Button "Netzwerk einrichten" das lokale
+LAN-Netzwerk einrichten. "eth0" bezeichnet die erste Netzwerkkarte im Rechner,
 eth1 die zweite usw. Befindet sich nur eine Netzwerkkarte im Rechner, kann
-die Vorgabe "eth0" übernommen werden. Modem, ISDN und DSL wird in der
-aktuellen Version noch nicht unterstützt.
+die Vorgabe "eth0" übernommen werden.
 
-3. Counterstrike einrichten
-Über den Desktop-Button "Counterstrike einrichten" eine Desktop-Verknüpfung 
-mit der Counterstrike Installation auf Deiner Festplatte einrichten. 
-Im erscheinenden Dialog den Installationsordner von Counterstrike angeben, 
-in dem sich hl.exe bzw. cstrike.exe befindet. Deine Festplatten werden in 
-dem Dialog so oder ähnlich erscheinen: ide/host0/bus0/target0/lun0/part1
+2. ADSL einrichten
+Die ADSL Verbindung wird eingerichtet über "ADSL einrichten".
+Vor der ADSL Einrichtung nicht das Netzwerk, wie unter 1. beschrieben,
+einrichten, ansonsten ist die Netzwerkkarte blockiert.
+Es öffnet sich ein Fenster, in dem das root-Passwort abgefragt wird.
+Danach wirst Du durch die ADSL Einrichtung geführt.
+
+Einige Anmerkungen:
+a) Solltest Du T-Online DSL Kunde sein, dann setzt sich Dein Benutzername 
+	 zusammen aus:
+1. Anschlusskennung
+2. Zugehöriger T-Online Nummer
+3. Suffix #0001
+4. @t-online.de
+z.B. 111111111111222222222222#0001@t-online.de
+b) Solltest Du mehr als eine Netzwerkkarte haben, gilt das gleiche wie 
+   unter 2. "Netzwerk einrichten".
+   Die erste Karte in Deinem Rechner ist "eth0", die zweite "eth1" usw.
+
+Sobald die Einrichtung abgeschlossen ist, kannst Du mit
+der Desktop-Verknüpfung "ADSL starten" die Verbindung aufrufen.
+
+3. Half-Life und HL-MODs (Public Enemy, Counterstrike) einrichten
+Über den Desktop-Button "Half-Life/Mods einrichten" eine Desktop-Verknüpfung
+mit der Half-Life Installation auf Deiner Festplatte einrichten.
+Im erscheinenden Dialog den Installationsordner von Half-Life angeben,
+in dem sich hl.exe bzw. cstrike.exe befindet. Deine Festplatten bzw.-Partitonen
+werden in dem Dialog so oder ähnlich erscheinen: Partition1, Partition2 usw.
+(Alle Partitionen sind schreibgeschützt und können von jollix nicht verändert
+werden!)
+Sobald die Desktop-Verknüpfung angelegt ist, kannst Du Public Enemy, bzw.
+Counterstrike starten. Alle HL-Mods nutzen in jollix die hardwarebeschleunigten 
+OpenGL-Treiber von NVidia, daher unbedingt vor dem erst Connecten eines Servers 
+nachsehen, ob unter:
+Configuration -> Video -> Modes "OpenGL" ausgewählt wurde und bei 
+"OpenGL Driver" "Default" steht. Die Standardauflösung von jollix ist auf
+1024x768 Bildpunkte eingestellt, daher sollte in CS an dieser Stelle bei den
+ersten Tests keine höhere Auflösung als "1024x768" Pixel ausgewählt werden.
+
+Wichtig:
+Die Desktopauflösung ändert man mit [Strg]+[Alt]+[+] bzw. [Strg]+[Alt]+[-]
+Sollte der Desktop bzw. HL Probleme machen oder eingefroren sein, kann man sich
+mit [Strg]+[Alt]+[Backspace] helfen.
+
+4. Passwörter
+Damit es fürs erste einfacher ist, haben wir Passwörter für die beiden
+eingerichteten Benutzer vorgegeben. Der Benutzer "root" ist vergleichbar mit 
+dem "Administrator" unter Windows, daher sollte man nur dann "root" benutzen, 
+wenn es von jollix verlangt wird. Der Benutzer "user" ist der eingerichtete
+Standardbenutzer, mit dem man spielen und surfen sollte. Wenn Du einen
+Internetzugang in jollix einrichten willst (Netzwerk oder ADSL), dann solltest 
+Du die beiden Passwörter vorher ändern. Nach einem Neustart der jollix LiveCD 
+sind die beiden Passwörter allerdings wieder zurückgesetzt, da sie nicht 
+dauerhaft auf der CD gespeichert werden können. Das root-Passwort und das
+user-Passwort ändert man am einfachsten, indem man im K-Menu unter 
+Programme -> System -> "KUser" aufruft und dort in der Liste den Benutzer
+"user" bzw. "root" per Doppelklick auswählt.
+
+
+Das root-Passwort lautet: jollix
+Das user-Passwort lautet: user
 
 
 Viel Spass mit jollix!
