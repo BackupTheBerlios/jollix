@@ -34,6 +34,7 @@ rm -fr cache db tmp lib/samba
 # portage
 echo "portage ..."
 cd ${JOLLIX_DIR}/usr
+cp -a ${JOLLIX_DIR}/usr/portage/licences /usr/share/
 tar -cjpf ../spare/portage-spare.tar.bz2 portage
 rm -fr portage
 # kernel sources
@@ -41,6 +42,9 @@ echo "kernel ..."
 cd ${JOLLIX_DIR}/usr/src
 tar -cjpf ../../spare/kernel-spare.tar.bz2 linux-2.4.20-gaming-r3
 rm -fr linux-2.4.20-gaming-r3
+echo "/usr/share/doc ..."
+cd ${JOLLIX_DIR}/usr/share
+tar -cjpf ../../spare/doc-spare.tar.bz2 doc
 
 # prepare etc
 echo "2. prepare /etc configs ..."
@@ -118,5 +122,5 @@ echo " opengl-update nvidia"
 echo " rm_ /etc/ati"
 echo " touch /etc/nvidia"
 echo " /etc/nvidia checken und evtl. /etc/ati löschen!"
-echo " rm_ -fr var/cache"
+echo " rm_ -fr var/cache var/tmp"
 echo " exit"

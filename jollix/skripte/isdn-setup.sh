@@ -31,8 +31,8 @@ protocol hdlc
 /dev/null
 EOF
 
-Xdialog --title "ISDN Konfiguration" --inputbox "IP-Adresse vom Nameserver eingeben (DNS).\nMehrere Server-Adressen werden durch ein\n Leerzeichen voneinander getrennt." 10 45 2> ${1}.3
-dnserver=`cat ${1}.3`
+Xdialog --title "ISDN Konfiguration" --inputbox "IP-Adresse vom Nameserver eingeben (DNS).\nMehrere Server-Adressen werden durch ein\n Leerzeichen voneinander getrennt." 10 45 2> ${1}.4
+dnserver=`cat ${1}.4`
 if [ -e /etc/resolv.conf ] ; then
     rm /etc/resolv.conf
 fi
