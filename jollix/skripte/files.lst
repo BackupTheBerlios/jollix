@@ -6,6 +6,7 @@ The files and skripts in here do either
    These scripts have a line like "# location in cloop: ..."
    to inidicate the place within the jollix system. (INTERN)
 
+checkroot	-- checks the root filesystem in jollix		(INTERN)
 create-cloop	-- creates the compressed loopback archive	(EXTERN)
 create-initrd	-- creates the initial ramdisk 			(EXTERN)
 create-iso	-- creates the jollix iso			(EXTERN)
