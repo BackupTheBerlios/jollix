@@ -74,7 +74,7 @@ case  $gfxmodule in
 	;;
     3) # switch to ati-drm
 	cp /etc/X11/XF86Config-ati-drm /etc/X11/XF86Config
-	opengl-update xfree
+	#opengl-update xfree
 	;;
 esac
 
