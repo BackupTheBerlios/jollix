@@ -1,6 +1,8 @@
 # shell?
 # Moduleloader
 # Copyright 2003 jollix
+# Jochen Spang <knochestolle@web.de>
+# Oliver Schwinn <patteh@web.de> 
 # Distributed under the terms of the GNU General Public License, v2 or later
 
 #alle Module laden!
@@ -20,4 +22,6 @@ for module in $(lsmod) ; do
   fi 
 done
 
-#agpgart.ko amd-k7-agp.ko sis-agp.ko via-agp.ko
+#Alsa unmuten
+amixer set Master 100 unmute
+amixer set PCM 100 unmute
