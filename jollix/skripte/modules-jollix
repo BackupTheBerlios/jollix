@@ -31,3 +31,12 @@ done
 #Alsa unmuten
 amixer set Master 100 unmute
 amixer set PCM 100 unmute
+
+sleep 5
+
+if grep "Mouse" /proc/bus/usb/devices >/dev/null 
+ then 
+ sed -ie 's/psaux/input\/mice/' /etc/X11/XF86Config
+else
+ sed -ie 's/input\/mice/psaux/' /etc/X11/XF86Config  
+fi

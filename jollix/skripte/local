@@ -4,7 +4,7 @@
 # and Jochen Spang <knochestolle@web.de>
 # for jollix <www.jollix.de>
 # Distributed under the terms of the GNU General Public License, v2 or later
-# $Header: /home/xubuntu/berlios_backup/github/tmp-cvs/jollix/Repository/jollix/skripte/local,v 1.5 2003/03/12 16:00:25 knochen Exp $
+# $Header: /home/xubuntu/berlios_backup/github/tmp-cvs/jollix/Repository/jollix/skripte/local,v 1.6 2003/03/12 17:09:27 knochen Exp $
 
 HILITE="\033[1m"
 NORMAL="\033[0m"
@@ -54,9 +54,7 @@ start() {
 	
         #modules-jollix, laden der Kernelmodule
         /sbin/modules-jollix
-	
-	#xf86config-jollix, anpassen der XF86Config
-	/sbin/xf86config-jollix
+
 }
 
 stop() {
