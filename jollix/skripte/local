@@ -1,7 +1,10 @@
 #!/sbin/runscript
 # Copyright 1999-2002 Gentoo Technologies, Inc.
+# Modified by Oliver Schwinn <patteh@web.de>
+# and Jochen Spang <knochestolle@web.de>
+# for jollix <www.jollix.de>
 # Distributed under the terms of the GNU General Public License, v2 or later
-# $Header: /home/xubuntu/berlios_backup/github/tmp-cvs/jollix/Repository/jollix/skripte/local,v 1.3 2003/02/19 21:36:43 knochen Exp $
+# $Header: /home/xubuntu/berlios_backup/github/tmp-cvs/jollix/Repository/jollix/skripte/local,v 1.4 2003/03/11 14:01:17 knochen Exp $
 
 HILITE="\033[1m"
 NORMAL="\033[0m"
@@ -47,28 +50,10 @@ start() {
 	fi
 	rm /tmp/mycd
 	mount -f tmpfs / -t tmpfs -o rw
-	eend 
-
-	echo "10000" > /proc/sys/fs/file-max
-	ebegin "Auto-scrambling root password for security"	
-	echo root:`pwgen -s 16` | chpasswd  > /dev/null 2>&1
 	eend
-	if [ "$NET" = "yes" ]
-	then
-		ebegin "Auto-detecting network modules"
-		# Disable kernel messages to console:
-		echo "0" > /proc/sys/kernel/printk
-		local x
-		for x in /lib/modules/*/kernel/drivers/net/*
-		do
-			y=${x##*/}
-			y=${y%%.*}
-			echo -ne " ${GOOD}*${NORMAL} Scanning for ${y}..."
-			insmod -f ${x} > /dev/null 2>&1
-			backup
-		done
-		echo "6" > /proc/sys/kernel/printk
-	fi
+	
+        #modules-jollix
+        /sbin/modules-jollix 
 }
 
 stop() {
