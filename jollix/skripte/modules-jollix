@@ -1,25 +1,25 @@
-# shell?
 # Moduleloader
 # Copyright 2003 jollix
 # Jochen Spang <knochestolle@web.de>
 # Oliver Schwinn <patteh@web.de> 
 # Distributed under the terms of the GNU General Public License, v2 or later
 
-#alle Module laden!
+#alle Module laden
 for module in $(pcimodules) ; do
        modprobe -s -k "$module"
 done
 
-#nVidia GK vorhanden?
+#nVidia GK vorhanden, dann agpgart entfernen
 for module in $(lsmod) ; do
-  if [ "$module" = "nvidia" ] ; then
-   echo "oh, eine nVidia GK!"  
-#agpgart entfernen! 
-   for rmmodule in /lib/modules/*/kernel/drivers/char/agp/* ; do
-     rmmod -f $rmmodule
-   done
-   rmmod -f agpgart
+  if [ "$module" = "NVdriver" ] ; then
+   rmmod agpgart
   fi 
+done
+
+for module in $(lsmod) ; do
+  if [ "$module" = "snd" ] ; then
+   modprobe snd-pcm-oss
+  fi
 done
 
 #Alsa unmuten
