@@ -22,7 +22,7 @@
 
 #    Modified by Jochen Spang <knochestolle@web.de> and
 #    Oliver Schwinn <patteh@web.de> for jollix <www.jollix.de>
-#    location in cloop: /sbin/transitmount
+
 
 
 # ====================== CONFIGURATION SECTION ======================
@@ -38,7 +38,8 @@
 		    "ext2" => [ '-o', 'ro,nodev,nosuid'],
 		    "ext3" => [ '-o', 'nodev,nosuid'],
 		    "minix" => [ '-o', 'nodev,nosuid'],
-                    "x86" => [ '-o', '-ro,uid=user'],
+                    "x86" => [ '-o', 'ro,uid=user'],
+		    "NTFS" => [ '-o', 'ro,uid=user'],
 
 # Furthermore, other filesystems are mounted "noexec"
 		    "iso9660" => [ '-o', 'nodev,nosuid,noexec'],
@@ -571,6 +572,7 @@ foreach $shortdevice (@handle) {
 sub isfilesystem {
     $_=shift;
     return "x86" if /x86/;
+    return "NTFS" if /NTFS/;
     return "ext2" if /ext2 filesystem/;
     return "ext3" if /ext3 filesystem/;
     return "minix" if /Minix filesystem/;
