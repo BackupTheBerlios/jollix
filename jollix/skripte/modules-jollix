@@ -8,44 +8,57 @@
 
 # load all modules
 for module in $(pcimodules) ; do
-       modprobe -s -k "$module"
+ modprobe -s -k "$module"
 done
 
-# if nVidia GK, remove agpgart 
-#for module in $(lsmod) ; do
-#  if [ "$module" = "NVdriver" ] ; then
-#   rmmod agpgart
-#  fi 
-#done
-
+# test nvidia module
+modprobe -q nvidia
 nvidiafound=0
 for module in $(lsmod) ; do
-  if [ "$module" = "NVdriver" ] ; then
+  if [ "$module" = "nvidia" ] ; then
    nvidiafound=1
   fi
 done
 
+# test fglrx module
 if [ $nvidiafound = 0 ] ; then
-  cp /etc/X11/XF86Config-vesa /etc/X11/XF86Config
-   else
-     cp /etc/X11/XF86Config-nvidia /etc/X11/XF86Config
+ modprobe -q fglrx
+ fglrxfound=0
+ for module in $(lsmod) ; do
+   if [ "$module" = "fglrx" ] ; then
+    fglrxfound=1
+   fi
+ done
 fi
 
+# vesa safemode
+if [ $nvidiafound = 0 ] ; then
+ if [ $fglrxfound = 0 ] ; then
+  cp /etc/X11/XF86Config-vesa /etc/X11/XF86Config
+  opengl-update xfree
+ fi
+fi
 
+# switch to nvidia
+if [ $nvidiafound = 1 ] ; then
+ cp /etc/X11/XF86Config-nvidia /etc/X11/XF86Config
+ opengl-update nvidia
+fi
 
+# switch to ati
+if [ $fglrxfound = 1 ] ; then
+ cp /etc/X11/XF86Config-ati /etc/X11/XF86Config
+ opengl-update ati
+fi
+
+# load oss
 for module in $(lsmod) ; do
   if [ "$module" = "snd" ] ; then
    modprobe snd-pcm-oss
   fi
 done
 
-#for module in $(lsmod) ; do
-#  if [ "$module" = "usbcore" ] ; then
-#   modprobe hid
-#  fi
-#done
-
-#Alsa unmuten
+# unmute alsa
 amixer set Master 25 unmute
 amixer set PCM 25 unmute
 
