@@ -5,7 +5,7 @@
 # for jollix <www.jollix.de>
 # location in cloop: /etc/init.d/local
 # Distributed under the terms of the GNU General Public License, v2 or later
-# $Header: /home/xubuntu/berlios_backup/github/tmp-cvs/jollix/Repository/jollix/skripte/local,v 1.13 2003/10/10 14:04:01 knochen Exp $
+# $Header: /home/xubuntu/berlios_backup/github/tmp-cvs/jollix/Repository/jollix/skripte/local,v 1.14 2003/10/10 16:53:05 knochen Exp $
 
 HILITE="\033[1m"
 NORMAL="\033[0m"
@@ -14,10 +14,7 @@ ATIGAMER="no"
 CMDLINE="`cat /proc/cmdline`"
 for x in $CMDLINE
 do
-	if [ "$x" = "lang=us" ]
-	then
-		LANG_US="yes"
-        elif [ "$x" = "atigamer" ]
+        if [ "$x" = "atigamer" ]
         then
                 ATIGAMER="yes"
 	fi
@@ -55,27 +52,13 @@ start() {
 	rm /tmp/mycd
 	mount -f tmpfs / -t tmpfs -o rw
 	eend
-	
+
         #modules-jollix, laden der Kernelmodule
         /sbin/modules-jollix.sh
 
 	#Partitionen mounten
 	/sbin/transitmount
         /sbin/transitlink
-
-	#language
-	if [ "$LANG_US" = "yes" ]
-        then
-            sed -i -e 's/de-latin1-nodeadkeys/us/' /etc/rc.conf
-	    sed -i -e 's/"de"/"us"/' /etc/X11/XF86Config
-	    /etc/init.d/keymaps restart
-            sed -i -e 's/Country=de/Country=us/' /home/user/.kde3.1/share/config/kdeglobals
-	    sed -i -e 's/Language=de/Language=en_US/' /home/user/.kde3.1/share/config/kdeglobals
-	    chown user /home/user/.kde3.1/share/config/kdeglobals
-	    chgrp users /home/user/.kde3.1/share/config/kdeglobals
-	#else
-	#    /etc/init.d/keymaps start
-        fi
 
         #ATI xinit workaround
         if [ "$ATIGAMER" = "yes" ]

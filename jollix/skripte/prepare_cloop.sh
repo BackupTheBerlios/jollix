@@ -51,6 +51,7 @@ cp ${WORK_DIR}/skripte/fstab ${JOLLIX_DIR}/etc/fstab
 cp ${WORK_DIR}/skripte/local ${JOLLIX_DIR}/etc/init.d/
 cp ${WORK_DIR}/skripte/modules ${JOLLIX_DIR}/etc/init.d/
 cp ${WORK_DIR}/skripte/checkroot ${JOLLIX_DIR}/etc/init.d/
+cp ${WORK_DIR}/skripte/keymaps ${JOLLIX_DIR}/etc/init.d/
 
 cp ${WORK_DIR}/skripte/modules-jollix.sh ${JOLLIX_DIR}/sbin/
 cp ${WORK_DIR}/skripte/transitmount ${JOLLIX_DIR}/sbin/
