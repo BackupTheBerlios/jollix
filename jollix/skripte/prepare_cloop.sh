@@ -17,8 +17,8 @@ rm -fr ${JOLLIX_DIR}/root/.*
 rm -fr ${JOLLIX_DIR}/root/Desktop
 rm -f ${JOLLIX_DIR}/etc/atigamer
 rm -f ${JOLLIX_DIR}/home/user/.bash_history
-chown -R user ${JOLLIX_DIR}/home/user
-chgrp -R users ${JOLLIX_DIR}/home/user
+#chown -R user ${JOLLIX_DIR}/home/user
+#chgrp -R users ${JOLLIX_DIR}/home/user
 #cd ${JOLLIX_DIR}/usr/src/linux/
 #make clean
 
