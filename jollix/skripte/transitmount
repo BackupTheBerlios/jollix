@@ -38,7 +38,7 @@
 		    "ext2" => [ '-o', 'ro,nodev,nosuid'],
 		    "ext3" => [ '-o', 'nodev,nosuid'],
 		    "minix" => [ '-o', 'nodev,nosuid'],
-                    "x86" => [ '-r'],
+                    "x86" => [ '-o', '-ro,uid=user'],
 
 # Furthermore, other filesystems are mounted "noexec"
 		    "iso9660" => [ '-o', 'nodev,nosuid,noexec'],
