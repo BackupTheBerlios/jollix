@@ -22,7 +22,7 @@
 
 #    Modified by Jochen Spang <knochestolle@web.de> and
 #    Oliver Schwinn <patteh@web.de> for jollix <www.jollix.de>
-
+#    location in cloop: /sbin/transitmount
 
 
 # ====================== CONFIGURATION SECTION ======================
