@@ -1,0 +1,8 @@
+#!/bin/sh
+#        ### x-net-setup-sudo ##
+# 
+# The script is called via KDE Desktop shortcut in
+# the running jollix system to set up the network.
+# location in cloop: /usr/bin/x-net-setup-sudo
+kdesu /usr/bin/x-net-setup
+
