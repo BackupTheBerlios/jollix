@@ -1,0 +1,24 @@
+#!/bin/sh
+#cloop_create
+
+abbruch() {
+          echo "cloop_create: Fehler"
+	exit 1
+}
+
+BUILDROOT=/mnt/hdd/data/gentoo-cd/buildroot
+LOOP_ROOT=${BUILDROOT}/looproot
+
+echo 0
+dd if=/dev/zero of=${BUILDROOT}/livecd.loop bs=1k count=1400000 || abbruch
+echo 1
+mke2fs -F -q ${BUILDROOT}/livecd.loop || abbruch
+echo 2
+mount -t ext2 -o loop ${BUILDROOT}/livecd.loop ${LOOP_ROOT} || abbruch
+echo 3
+cp -a /mnt/hdd/data/gentoo-cd/jollix062/* ${LOOP_ROOT} || abbruch
+echo 4
+umount ${LOOP_ROOT} || abbruch
+echo 5
+cat ${BUILDROOT}/livecd.loop | /usr/bin/create_compressed_ucl_fs - 131072 > /mnt/hdd/data/gentoo-cd/jollix-06/livecd.cloop || abbruch
+echo ende
