@@ -34,7 +34,7 @@ rm -fr cache db tmp lib/samba
 # portage
 echo "portage ..."
 cd ${JOLLIX_DIR}/usr
-cp -a ${JOLLIX_DIR}/usr/portage/licences /usr/share/
+cp -a ${JOLLIX_DIR}/usr/portage/licences ${JOLLIX_DIR}/usr/share/
 tar -cjpf ../spare/portage-spare.tar.bz2 portage
 rm -fr portage
 # kernel sources

@@ -51,6 +51,15 @@ fi
 #    done
 #fi
 
+local CMDLINE="`cat /proc/cmdline`"
+	for x in $CMDLINE
+	do
+		if [ "$x" = "vesa" ]
+		then
+                  gfxmodule=0
+		fi
+	done
+
 case  $gfxmodule in
     0) # use vesa safemode
 	cp /etc/X11/XF86Config-vesa /etc/X11/XF86Config
@@ -78,7 +87,6 @@ case  $gfxmodule in
 	;;
 esac
 
-
 # SOUND SECTION #####################################################
 # load oss
 for module in $(lsmod) ; do
@@ -98,11 +106,11 @@ declare -i counter=0
 while $goon ; do
     if grep -i "mouse" /proc/bus/usb/devices >/dev/null
 	then
-	goon=false 
+	goon=false
     else
 	counter=${counter}+1
 	echo -n .
-	sleep 1 
+	sleep 1
     fi
     if [ $counter = 5 ]
 	then
@@ -110,9 +118,15 @@ while $goon ; do
     fi
 done
 
-if grep -i "mouse" /proc/bus/usb/devices >/dev/null 
-    then 
+if grep -i "mouse" /proc/bus/usb/devices >/dev/null
+    then
     sed -i -e 's/psaux/input\/mice/' /etc/X11/XF86Config
+    sed -i -e 's/psaux/input\/mice/' /etc/X11/XF86Config-vesa
+    sed -i -e 's/psaux/input\/mice/' /etc/X11/XF86Config-ati
+    sed -i -e 's/psaux/input\/mice/' /etc/X11/XF86Config-nvidia
 else
-    sed -i -e 's/input\/mice/psaux/' /etc/X11/XF86Config  
+    sed -i -e 's/input\/mice/psaux/' /etc/X11/XF86Config
+    sed -i -e 's/psaux/input\/mice/' /etc/X11/XF86Config-vesa
+    sed -i -e 's/psaux/input\/mice/' /etc/X11/XF86Config-ati
+    sed -i -e 's/psaux/input\/mice/' /etc/X11/XF86Config-nvidia
 fi
