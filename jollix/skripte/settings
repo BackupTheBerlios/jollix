@@ -1,0 +1,25 @@
+#          ### settings ###
+# Defines the locations under /cvsroot/jollix
+# which are part of the CVS but may vary (e.g. due to 
+# different versions) and other variables sourced by
+# the 3 scripts:
+#  - create-initrd (builds the initial ramdisk)
+#  - create-cloop  (builds the jollix system as "cloop")
+#  - create-iso    (builds an iso tu burn on CD)
+# Directory locations are relative to cvsroot/jollix.
+# This is a good place for internationalisation, e.g.
+# Dialog box strings may be put into variables etc.
+
+# contents of our CD
+LIVECD_DIR=CD
+# some files necessary to build initrd
+SRC_INITRD=src-initrd
+BUSYBOX_DIR=busybox
+CLOOP_DIR=cloop
+# decompressed jollix system 
+JOLLIX_DIR=jollix01
+STORAGE_MODULES="aic79xx aic7xxx BusLogic ncr53c8xx \
+NCR53c406a initio advansys aha1740 aha1542 aha152x \
+atp870u dtc eata fdomain gdth megaraid pas16 pci2220i \
+pci2000 psi240i qlogicfas qlogicfc qlogicisp seagate \
+t128 tmscsim u14-34f ultrastor wd7000 dc395x_trm"
