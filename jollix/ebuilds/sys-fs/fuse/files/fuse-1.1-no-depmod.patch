@@ -1,0 +1,15 @@
+diff -ruP fuse-1.1.orig/kernel/Makefile.in fuse-1.1/kernel/Makefile.in
+--- fuse-1.1.orig/kernel/Makefile.in	2004-01-07 13:52:05.000000000 +0100
++++ fuse-1.1/kernel/Makefile.in	2004-03-18 22:26:55.000000000 +0100
+@@ -20,11 +20,9 @@
+ install: all
+ 	@$(mkinstalldirs) $(DESTDIR)$(fusemoduledir)
+ 	$(INSTALL) -m 644 $(fusemodule) $(DESTDIR)$(fusemoduledir)/$(fusemodule)
+-	-/sbin/depmod -a
+ 
+ uninstall:
+ 	rm -f $(DESTDIR)$(fusemoduledir)/$(fusemodule)
+-	-/sbin/depmod -a
+ 
+ clean:
+ 	-rm -f $(fusemodule) *.o .*.cmd *.mod.c *.ko *.s

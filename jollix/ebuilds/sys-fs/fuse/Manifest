@@ -1,0 +1,3 @@
+MD5 7b43eb3175e0d54a6760753be0b169ca fuse-1.1.ebuild 1043
+MD5 5dbf6ab779717cc95824d61a0b9e79c3 files/digest-fuse-1.1 60
+MD5 325cc7764b3f18dd84de2f48bece3df4 files/fuse-1.1-no-depmod.patch 529
