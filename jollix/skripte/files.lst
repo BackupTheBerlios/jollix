@@ -1,0 +1,26 @@
+The files and skripts in here do either
+1. create & configure parts of jollix and the jollix system itself.
+   Execution is usually done from cvsroot/jollix    (EXTERN)
+2. nifty things in the running jollix system, e.g.  
+   mounting partitions, setting up the network etc.
+   These scripts have a line like "# location in cloop: ..."
+   to inidicate the place within the jollix system. (INTERN)
+
+create-cloop	-- creates the compressed loopback archive	(EXTERN)
+create-initrd	-- creates the initial ramdisk 			(EXTERN)
+create-iso	-- creates the jollix iso			(EXTERN)
+csanleg		-- creates desktop icon to play Counter-Strike	(INTERN)
+local		-- /etc/init.d/local startup script		(INTERN)
+lss16toppm	-- converts lss to ppm 16 bit image		(EXTERN)
+modules-jollix	-- loads all possible kernel modules		(INTERN)
+ppmtolss16	-- converts ppm to lss 16 bit image		(EXTERN)
+settings	-- describes current production environment	(EXTERN)
+transitmount	-- mounts hd partitions under /mnt/transit	(INTERN)
+x-net-setup	-- sets up a network interface			(INTERN)
+x-net-setup-sudo - calls x-net-setup as root			(INTERN) 
+
+
+
+
+
+
