@@ -891,7 +891,7 @@ tmpfs			/dev/shm	tmpfs		defaults		0 0
 
 <p>Anschliessend den Rechner neu starten und die neue jollix Festplatteninstallation booten.</p>
 
-<p>Die folgenden Schritte nach dem ersten Booten von jollix durchführen. Sie erfordern das Downloaden der im FTP Verzeichnis <span class="path">ftp://ftp.berlios.de/pub/jollix/spare/</span> enthaltenen Dateien. Dies sind: portage-spare.tar.bz2, kernel-spare.tar.bz2 und doc-spare.tar.bz2. Diese drei Dateien in <span class="path">/spare</span> speichern und die nachfolgenden Befehle als root ausführen. Also Konsole aufmachen und als root anmelden:</p>
+<p>Die folgenden Schritte nach dem ersten Booten von jollix durchführen. Sie erfordern das Downloaden der im FTP Verzeichnis <a href="ftp://ftp.berlios.de/pub/jollix/spare/" target="_blank"><span class="path">ftp://ftp.berlios.de/pub/jollix/spare/</span></a> enthaltenen Dateien. Dies sind: portage-spare.tar.bz2, kernel-spare.tar.bz2 und doc-spare.tar.bz2. Diese drei Dateien im Ordner "downloads" speichern und die nachfolgenden Befehle als root ausführen. Also Konsole aufmachen und als root anmelden:</p>
 
 <table class="ntable" width="100%" cellspacing="0" cellpadding="0" border="0">
 <tr><td class="infohead" bgcolor="#eec625"><p>
@@ -900,11 +900,15 @@ tmpfs			/dev/shm	tmpfs		defaults		0 0
 <span class="greentext">user@jollix</span><span class="bluetext"> user # </span><span class="whitetext">su -</span>
 </pre></td></tr>
 <tr><td bgcolor="#000000"><pre>
-<span class="redtext">jollix</span><span class="bluetext"> / # </span><span class="whitetext">mv /home/user/Desktop/portage-spare.tar.bz2 /spare/</span>
+<span class="redtext">jollix</span><span class="bluetext"> / # </span><span class="whitetext">mv /home/user/downloads/portage-spare.tar.bz2 /spare/</span>
 </pre>
 </td></tr>
 <tr><td bgcolor="#000000"><pre>
-<span class="redtext">jollix</span><span class="bluetext"> / # </span><span class="whitetext">mv /home/user/Desktop/kernel-spare.tar.bz2 /spare/</span>
+<span class="redtext">jollix</span><span class="bluetext"> / # </span><span class="whitetext">mv /home/user/downloads/kernel-spare.tar.bz2 /spare/</span>
+</pre>
+</td></tr>
+<tr><td bgcolor="#000000"><pre>
+<span class="redtext">jollix</span><span class="bluetext"> / # </span><span class="whitetext">mv /home/user/downloads/doc-spare.tar.bz2 /spare/</span>
 </pre>
 </td></tr>
 <tr><td bgcolor="#000000"><pre>
@@ -941,7 +945,7 @@ tmpfs			/dev/shm	tmpfs		defaults		0 0
 </pre>
 </td></tr>
 </table>
-<p>jollix ist jetzt fertig installiert inkl. aktuellem Portage und den Kernel Quellen und stellt somit ein komplettes gentoo System zur Verfügung. Weitere Informationen zu Portage gibt es <a href="http://www.gentoo.org/doc/de/portage-manual.xml">hier</a>.</p>
+<p>jollix ist jetzt fertig installiert inkl. aktuellem Portage und den Kernel Quellen und stellt somit ein komplettes gentoo System zur Verfügung. Weitere Informationen zu Portage gibt es <a href="http://www.gentoo.org/doc/de/portage-manual.xml" target="_blank">hier</a>.</p>
 			 </td>
 		</tr>
 	</table>
