@@ -1,0 +1,17 @@
+mounten:
+voodoosemmel CD # insmod /lib/modules/misc/cloop.o file=livecd.cloop
+voodoosemmel CD # mount -o ro /dev/cloop ../cloopdevice/
+
+auspacken:
+voodoosemmel cloop-0.67 # insmod /lib/modules/misc/cloop.o file=../../CD/livecd.cloop
+voodoosemmel cloop-0.67 # mount -o /dev/cloop ../../cloopdevice/
+voodoosemmel cloop-0.67 # mount -o ro /dev/cloop ../../cloopdevice/
+voodoosemmel cloop-0.67 # cp -a ../../cloopdevice/* ../../livecd-cloop
+
+unmount:
+voodoosemmel cloop-0.67 # umount /dev/cloop
+voodoosemmel cloop-0.67 # rmmod cloop
+
+
+
+

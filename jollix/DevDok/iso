@@ -1,0 +1,1 @@
+mkisofs -R -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table /mnt/hdd/data/gentoo-cd/CD > /mnt/hdd/data/gentoo-cd/stage4cd.iso
