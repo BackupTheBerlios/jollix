@@ -1,50 +1,69 @@
 #!/bin/sh
-#        ####   csanleg   ####
-# legt eine Verknüpfung auf dem Desktop an, 
-# die Counter-Strike mittels wine startet.
+#               ####   csanleg   ####
+# creates a desktop shortcut to Counter-Strike executable
+# location in cloop: /usr/bin/csanleg
 
-csordner=''
+csdir=''
+gamename="Half-Life"
+gameexe="hl.exe"
+desktopentry="winex -- ${csdir}hl.exe -game cstrike -console"
 csexe=1
-# Sartverzeichnis evtl. noch "intelligent" suchen
-startverz="/mnt"
+csinstall=1
+searchdir="/mnt/transit"
+
+csinstall=`Xdialog --stdout --title "Half-Life oder Counter-Strike?" --radiolist "Conter-Strike direkt oder\nueber eine Half-Life Installation aufrufen?" 16 40 25 1 "Half-Life (hl.exe -game cstrike)" on 2 "Counter-Strike (cstrike.exe)" off`
+
+case $csinstall in
+    1)
+	gamename="Half-Life"
+	gameexe="hl.exe"
+	desktopentry="winex -- ${csdir}hl.exe -game cstrike -console"
+	;;
+    2)
+	gamename="Counter-Strike"
+	gameexe="cstrike.exe"
+	desktopentry="winex -- ${csdir}cstrike.exe -console"
+	;;
+esac
 
 while [ $csexe == 1 ]  
   do
-  csordner=`Xdialog --stdout --cancel-label "Abbrechen" --title "Counter-Strike Ordner angeben" --fselect $startverz 45 90`
+  csdir=`Xdialog --stdout --cancel-label "Abbrechen" --title "$gamename Ordner angeben" --fselect $searchdir 45 90`
   cspath_exit=$?
   case $cspath_exit in
-      0) # All OK. The $csordner variable holds everything entered/choosed by the user.
-	  if [ ! -d $csordner ] 
+      0) # All OK. The $csdir variable holds everything entered/choosed by the user.
+	  if [ ! -d $csdir ] 
 	      then
-	      Xdialog --stdout --title "Fehler" --infobox "Kein Verzeichnis angegeben.\n Bitte das korrekte Verzeichnis angeben oder abbrechen." 10 60 9999
+	      Xdialog --stdout --title "Error" --infobox "Kein Verzeichnis angegeben.\n Bitte das korrekte Verzeichnis angeben oder abbrechen." 10 60 9999
 	      csexe=1
 	  else
-	      if [ -f ${csordner}cstrike.exe ]
+	      if [ -f ${csdir}${gameexe} ]
 		  then 
-		  csdesktop="[Desktop Entry]\n
-                            Comment=\n
-                            Comment[de]=\n
-                            Encoding=UTF-8\n
-                            Exec=wine -- ${csordner}cstrike.exe\n
-                            GenericName=\n
-                            GenericName[de]=\n
-                            Icon=${csordner}cstrike.xpm\n
-                            MimeType=\n
-                            Name=CounterStrike\n
-                            Name[de]=CounterStrike\n
-                            Path=\n
-                            ServiceTypes=\n
-                            SwallowExec=\n
-                            SwallowTitle=\n
-                            Terminal=false\n
-                            TerminalOptions=\n
-                            Type=Application\n
-                            X-KDE-SubstituteUID=false\n
-                            X-KDE-Username=\n"
-		  echo -e $csdesktop > /home/olli/Desktop/CounterStrike
+		  cat >>/home/user/Desktop/CounterStrike.desktop <<EOF
+[Desktop Entry]
+Comment=
+Comment[de]=
+Encoding=UTF-8
+Exec=$desktopentry
+GenericName=
+GenericName[de]=
+Icon=/home/user/.kde3.1/share/icons/cstrike.xpm
+MimeType=
+Name=CounterStrike
+Name[de]=CounterStrike
+Path=${csdir} 
+ServiceTypes=
+SwallowExec=
+SwallowTitle=
+Terminal=false
+TerminalOptions=
+Type=Application
+X-KDE-SubstituteUID=false
+X-KDE-Username=
+EOF
 		  csexe=0
 	      else 
-		  Xdialog --stdout --title "Fehler" --infobox "Konnte die Datei \"cstrike.exe\" in\n $csordner\n nicht finden. Bitte das korrekte Verzeichnis angeben oder abbrechen." 10 60 9999
+		  Xdialog --stdout --title "Fehler" --infobox "Konnte die Datei \"hl.exe\" in\n $csdir\n nicht finden. Bitte das korrekte Verzeichnis angeben oder abbrechen." 10 60 9999
 	      fi
 	  fi
 	  ;;
