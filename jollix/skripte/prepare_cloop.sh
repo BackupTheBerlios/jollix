@@ -3,13 +3,11 @@
 #
 #  This script prepares jollix to be clooped.
 #  Use as root from cvsroot/jollix directory.
-#
-#  Also important for the livecd:
-#  1.) jollix02/lib/modulezs/misc/cloop.o -> CD/isolinux/initrd
-#  2.) jollix02/boot/vmlinuz-2.4.20-gaming-r3 -> CD/isolinux/jollix
-
 
 source skripte/settings
+
+# cp ${JOLLIX_DIR}/lib/modules/misc/cloop.o -> CD/isolinux/initrd
+# cp ${JOLLIX_DIR}/boot/vmlinuz-2.4.20-gaming-r3 -> CD/isolinux/jollix
 
 # cleaning jollix tree
 echo "0. cleaning jollix ..."
@@ -18,6 +16,7 @@ rm -fr ${JOLLIX_DIR}/tmp/.*
 rm -fr ${JOLLIX_DIR}/root/.*
 rm -fr ${JOLLIX_DIR}/root/Desktop
 rm -f ${JOLLIX_DIR}/etc/atigamer
+rm -f ${JOLLIX_DIR}/home/user/.bash_history
 #cd ${JOLLIX_DIR}/usr/src/linux/
 #make clean
 
@@ -53,6 +52,17 @@ cp ${WORK_DIR}/skripte/local ${JOLLIX_DIR}/etc/init.d/
 cp ${WORK_DIR}/skripte/modules ${JOLLIX_DIR}/etc/init.d/
 cp ${WORK_DIR}/skripte/checkroot ${JOLLIX_DIR}/etc/init.d/
 
+cp ${WORK_DIR}/skripte/modules-jollix.sh ${JOLLIX_DIR}/sbin/
+cp ${WORK_DIR}/skripte/transitmount ${JOLLIX_DIR}/sbin/
+cp ${WORK_DIR}/skripte/transitlink ${JOLLIX_DIR}/sbin/
+cp ${WORK_DIR}/skripte/fritzdsl-connect.sh ${JOLLIX_DIR}/usr/bin/
+cp ${WORK_DIR}/skripte/fritzdsl-setup.sh ${JOLLIX_DIR}/usr/bin/
+cp ${WORK_DIR}/skripte/hlinstall.sh ${JOLLIX_DIR}/usr/bin/
+cp ${WORK_DIR}/skripte/isdn-connect.sh ${JOLLIX_DIR}/usr/bin/
+cp ${WORK_DIR}/skripte/isdn-setup.sh ${JOLLIX_DIR}/usr/bin/
+cp ${WORK_DIR}/skripte/mousewheel-setup.sh ${JOLLIX_DIR}/usr/bin/
+cp ${WORK_DIR}/skripte/x-net-setup.sh ${JOLLIX_DIR}/usr/bin/
+
 # configure opengl
 echo "3. opengl settings ..."
 mkdir ${JOLLIX_DIR}/etc/opengl
@@ -75,7 +85,7 @@ echo " env-update"
 echo " source /etc/profile"
 echo " opengl-update nvidia"
 echo " /etc/nvidia checken und evtl. /etc/ati löschen!"
-echo " rm -fr var/tmp var/cache"
-echo " rm -fr /root/.*"
+echo " rm_ -fr var/tmp var/cache"
+echo " rm_ -fr /root/.*"
 echo " .bash_history von user?"
 echo " exit"
