@@ -1,96 +1,116 @@
-############################################################################
-# jollix 0.1.1 Erste Schritte # http://www.jollix.de # 0.1.1 PE/CS-Release #
-############################################################################
+######################################################################
+# jollix 0.2 Erste Schritte # http://www.jollix.de # 0.2 ATI-Release #
+######################################################################
 
-0. Was ist jollix 0.1.1?
-Jollix ist eine einfach zu installierende und komplett freie Linux Distribution
-für die x86 Architektur, die auf Gentoo Linux basiert. Mit jollix soll
-hauptsächlich dem Gamer und Multimedia-Enthusiast der vollständige Umstieg
-von MS-Windows auf Linux erleichtert werden. Die Version 0.1.1 ist die erste
-Beta-Release zum Testen von Public Enemy und Counterstrike unter Linux. 
-Weitere Spiele und die Möglichkeit zur Installation auf Deiner Festplatte 
-folgen.
+
+0. Was ist jollix 0.2?
+Jollix ist eine komplett freie Linux Distribution für die x86 Architektur,
+die auf Gentoo Linux basiert. Mit jollix soll haupstächlich dem Gamer und
+Multimedia-Enthusiast der vollständige Umstieg von MS-Windows auf Linux
+erleichtert werden. Die Version 0.2 ist die zweite release von jollix.
+Die wichtigsten Erweiterungen gegenüber der Version 0.1 ist die Unterstützung
+von ATI Radeon Graphikkarten, ISDN und DSL Karte von AVM.
+
 
 1. Netzwerk einrichten
-Über den Desktop-Button "Netzwerk einrichten" das lokale
-LAN-Netzwerk einrichten. "eth0" bezeichnet die erste Netzwerkkarte im Rechner,
+Über "jollix einrichten" das Icon  "Netzwerk einrichten" anklicken, um das lokale
+LAN-Netzwerk einzurichten. "eth0" bezeichnet die erste Netzwerkkarte im Rechner,
 eth1 die zweite usw. Befindet sich nur eine Netzwerkkarte im Rechner, kann
 die Vorgabe "eth0" übernommen werden.
 
+
 2. ADSL einrichten
 Die ADSL Verbindung wird eingerichtet über "ADSL einrichten".
-Vor der ADSL Einrichtung nicht das Netzwerk, wie unter 1. beschrieben,
-einrichten, ansonsten ist die Netzwerkkarte blockiert.
 Es öffnet sich ein Fenster, in dem das root-Passwort abgefragt wird.
-Danach wirst Du durch die ADSL Einrichtung geführt.
+Danach wird man durch die ADSL Einrichtung geführt.
 
 Einige Anmerkungen:
-a) Solltest Du T-Online DSL Kunde sein, dann setzt sich Dein Benutzername 
-	 zusammen aus:
+a) T-Online DSL Kunden sollten den Benutzernamen wie folgt angeben:
 1. Anschlusskennung
 2. Zugehöriger T-Online Nummer
 3. Suffix #0001
 4. @t-online.de
 z.B. 111111111111222222222222#0001@t-online.de
-b) Solltest Du mehr als eine Netzwerkkarte haben, gilt das gleiche wie 
-   unter 2. "Netzwerk einrichten".
-   Die erste Karte in Deinem Rechner ist "eth0", die zweite "eth1" usw.
+b) Befinden sich im Rechner mehr als eine Netzwerkkarte, gilt das gleiche
+wie unter 2. "Netzwerk einrichten". Die erste Karte im Rechner ist "eth0",
+die zweite "eth1" usw.
 
-Sobald die Einrichtung abgeschlossen ist, kannst Du mit
-der Desktop-Verknüpfung "ADSL starten" die Verbindung aufrufen.
+Sobald die Einrichtung abgeschlossen ist, kannst mit der Desktop-Verknüpfung
+"ADSL starten" die Verbindung aufgebaut werden.
 
-3. Half-Life und HL-MODs (Public Enemy, Counterstrike) einrichten
-Über den Desktop-Button "Half-Life/Mods einrichten" eine Desktop-Verknüpfung
-mit der Half-Life Installation auf Deiner Festplatte einrichten.
-Im erscheinenden Dialog den Installationsordner von Half-Life angeben,
-in dem sich hl.exe bzw. cstrike.exe befindet. Deine Festplatten bzw.-Partitonen
-werden in dem Dialog so oder ähnlich erscheinen: Partition1, Partition2 usw.
+
+3. Fritz!CardDSL einrichten
+Zur Einrichtung einer Fritz!CardDSL gibt es ein extra Icon unter 
+"Jollix einrichten". Nach Klick auf "Fritz!CardDSL einrichten" gibt man hier
+den vom Provider zugewiesenen Benutzernamen sowie das dazugehörige Passwort an.
+Danach muss noch mindestens eine IP-Adresse vom Domain Name Service angegeben 
+werden. Mehrere IP-Adressen werden durch Leerzeichen voneinander getrennt.
+Standardmäßig ist 192.168.0.1 eingerichtet. Wenn z.B. ein eigener DNS-Service 
+im LAN betrieben wird kann die Adresse des eigenen DNS-Servers hier gegebenenfalls 
+angepasst werden.
+
+
+4. ISDN einrichten
+Es müssen die gleichen Angaben gemacht werden wie unter Punkt 3.
+"Fritz!CardDSL einrichten".
+
+
+5. Counterstrike einrichten
+Über den Desktop-Button "Counterstrike einrichten" eine Desktop-Verknüpfung
+mit der Counterstrike Installation auf der Festplatte einrichten.
+Im erscheinenden Dialog den Installationsordner von Counterstrike angeben,
+in dem sich hl.exe bzw. cstrike.exe befindet. Die Festplatten werden in
+dem Dialog so oder ähnlich erscheinen: Partition1, Partition2 usw.
 (Alle Partitionen sind schreibgeschützt und können von jollix nicht verändert
 werden!)
-Sobald die Desktop-Verknüpfung angelegt ist, kannst Du Public Enemy, bzw.
-Counterstrike starten. Alle HL-Mods nutzen in jollix die hardwarebeschleunigten 
-OpenGL-Treiber von NVidia, daher unbedingt vor dem erst Connecten eines Servers 
-nachsehen, ob unter:
-Configuration -> Video -> Modes "OpenGL" ausgewählt wurde und bei 
-"OpenGL Driver" "Default" steht. Die Standardauflösung von jollix ist auf
-1024x768 Bildpunkte eingestellt, daher sollte in CS an dieser Stelle bei den
-ersten Tests keine höhere Auflösung als "1024x768" Pixel ausgewählt werden.
 
-Wichtig:
-Die Desktopauflösung ändert man mit [Strg]+[Alt]+[+] bzw. [Strg]+[Alt]+[-]
-Sollte der Desktop bzw. HL Probleme machen oder eingefroren sein, kann man sich
-mit [Strg]+[Alt]+[Backspace] helfen.
+6. Mausrad aktivieren
+Es kann vorkommen, dass das Mausrad bei einigen Mäusen nicht auf Anhieb
+funktioniert. Damit möglichst viele Mäuse, insbesondere auch Logitech-Mäuse,
+funktionieren wurde jollix so vorkonfiguriert, das es unter Umständen notwendig
+ist, die Mausrad-Unterstützung nachträglich zu aktivieren. 
+Unter "Jollix einrichten" klickt man dazu das Icon "Mausrad (de)aktivieren" an.
+Nachdem man seine Wahl getroffen hat muss der X-Server neu gestartet werden.
+Das geht am einfachsten, indem man im laufenden KDE die Tastenkombination
+STRG+ALT+BACKSPACE drückt.
+ACHTUNG! Bei aaktiviertm Mausrad kann es zu Fehlfunktionen bei einigen
+Logitech-Mäusen kommen!
+
 
 4. Passwörter
-Damit es fürs erste einfacher ist, haben wir Passwörter für die beiden
-eingerichteten Benutzer vorgegeben. Der Benutzer "root" ist vergleichbar mit 
-dem "Administrator" unter Windows, daher sollte man nur dann "root" benutzen, 
-wenn es von jollix verlangt wird. Der Benutzer "user" ist der eingerichtete
-Standardbenutzer, mit dem man spielen und surfen sollte. Wenn Du einen
-Internetzugang in jollix einrichten willst (Netzwerk oder ADSL), dann solltest 
-Du die beiden Passwörter vorher ändern. Nach einem Neustart der jollix LiveCD 
-sind die beiden Passwörter allerdings wieder zurückgesetzt, da sie nicht 
-dauerhaft auf der CD gespeichert werden können. Das root-Passwort und das
-user-Passwort ändert man am einfachsten, indem man im K-Menu unter 
-Programme -> System -> "KUser" aufruft und dort in der Liste den Benutzer
+Damit es fürs erste einfacher ist, sind die Passwörter für die beiden
+eingerichteten Benutzer vorgegeben. Der Benutzer "root" ist vergleichbar mit dem
+"Administrator" unter Windows, daher sollte man nur dann "root" benutzen, wenn es
+von jollix ausdrücklich verlangt wird. Der Benutzer "user" ist der eingerichtete
+Standardbenutzer, mit dem man spielen und surfen sollte. Vor der Einrichtung eines
+Internetzuganges unter jollix (Netzwerk oder ADSL), sollten die beiden Passwörter
+unbedingt geändert werden! Nach einem Neustart der jollix LiveCD sind die beiden
+Passwörter allerdings wieder zurückgesetzt, da sie nicht dauerhaft auf der CD gespeichert
+werden können.
+Das root-Passwort und das user-Passwort ändert man am einfachsten, indem man
+in "jollix einrichten" die "Benutzerverwaltung" aufruft und dort in der Liste den Benutzer
 "user" bzw. "root" per Doppelklick auswählt.
 
-
 Das root-Passwort lautet: jollix
+
 Das user-Passwort lautet: user
+
+
 
 
 Viel Spass mit jollix!
 
+Oliver Schwinn [patteh@berlios.de] und Jochen Spang [knochen@berlios.de]
 
--- 
-Feedback erwünscht! 
 
-Web-Forum: www.jollix.de
+--
+Feedback erwünscht!
 
-oder an
+Homepage und Forum: http://www.jollix.de
 
-patteh@berlios.de
-knochen@berlios.de
+IRC: irc://irc.quakenet.org/jollix
+
+
+
 
 
