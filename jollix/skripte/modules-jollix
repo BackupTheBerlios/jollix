@@ -46,8 +46,8 @@ done
 #done
 
 #Alsa unmuten
-amixer set Master 100 unmute
-amixer set PCM 100 unmute
+amixer set Master 25 unmute
+amixer set PCM 25 unmute
 
 # USB PS/2 mouse configuration
 # wait 5 sec. for usb/devices to be created (hackattack!)

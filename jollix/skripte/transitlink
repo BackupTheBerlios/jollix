@@ -1,0 +1,12 @@
+#!/bin/sh
+mkdir /mnt/partitions
+mkdir /mnt/partitions/dummy
+data=""
+directory="/mnt/transit"
+ldirectory="/mnt/partitions"
+declare -i counter=1
+
+for data in $(ls -1 "$directory") ; do
+     ln -s ${directory}/"$data" ${ldirectory}/"Partition$counter"
+     counter=${counter}+1
+done
