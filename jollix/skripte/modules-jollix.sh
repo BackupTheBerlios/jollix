@@ -19,24 +19,40 @@ done
 
 # GRAPHIC SECTION ################################################
 # graphic adapter module: 0=VESA, 1=NVIDIA, 2=FGLRX, 3=RadeonDRI
+
 gfxmodule=0
+failsafe=0
+
+CMDLINE="`cat /proc/cmdline`"
+	for x in $CMDLINE
+	do
+		if [ "$x" = "vesa" ]
+		then
+                  failsafe=1
+		fi
+	done
 
 # test nvidia module
-insmod -q nvidia > /dev/null
-for module in $(lsmod) ; do
-    if [ "$module" = "nvidia" ] ; then
-	gfxmodule=1
-    fi
-done
+
+if [ $failsafe = 0 ] ; then
+  insmod -q nvidia > /dev/null
+    for module in $(lsmod) ; do
+     if [ "$module" = "nvidia" ] ; then
+	 gfxmodule=1
+     fi
+    done
+fi
 
 # test fglrx module
 if [ $gfxmodule = 0 ] ; then
-    insmod -q fglrx > /dev/null
-    for module in $(lsmod) ; do
-	if [ "$module" = "fglrx" ] ; then
+  if [ $failsafe = 0 ] ; then
+     insmod -q fglrx > /dev/null
+       for module in $(lsmod) ; do
+	 if [ "$module" = "fglrx" ] ; then
 	    gfxmodule=2
-	fi
-    done
+	 fi
+       done
+  fi
 fi
 
 # test RadeonDRI module
@@ -51,25 +67,16 @@ fi
 #    done
 #fi
 
-CMDLINE="`cat /proc/cmdline`"
-	for x in $CMDLINE
-	do
-		if [ "$x" = "vesa" ]
-		then
-                  gfxmodule=0
-		fi
-	done
-
 case  $gfxmodule in
     0) # use vesa safemode
 	cp /etc/X11/XF86Config-vesa /etc/X11/XF86Config
-        #opengl-update xfree
+        opengl-update xfree
 	;;
     1) # switch to nvidia
 	cp /etc/X11/XF86Config-nvidia /etc/X11/XF86Config
 	if [ ! -e /etc/nvidia ] ; then
 	  touch /etc/nvidia
-	  rm /etc/ati
+	  rm -f /etc/ati
 	  opengl-update nvidia
 	fi
 	;;
@@ -77,7 +84,7 @@ case  $gfxmodule in
 	cp /etc/X11/XF86Config-ati /etc/X11/XF86Config
 	if [ ! -e /etc/ati ] ; then
 	  touch /etc/ati
-	  rm /etc/nvidia
+	  rm -f /etc/nvidia
 	  opengl-update ati
 	fi
 	;;
@@ -126,7 +133,7 @@ if grep -i "mouse" /proc/bus/usb/devices >/dev/null
     sed -i -e 's/psaux/input\/mice/' /etc/X11/XF86Config-nvidia
 else
     sed -i -e 's/input\/mice/psaux/' /etc/X11/XF86Config
-    sed -i -e 's/psaux/input\/mice/' /etc/X11/XF86Config-vesa
-    sed -i -e 's/psaux/input\/mice/' /etc/X11/XF86Config-ati
-    sed -i -e 's/psaux/input\/mice/' /etc/X11/XF86Config-nvidia
+    sed -i -e 's/input\/mice/psaux/' /etc/X11/XF86Config-vesa
+    sed -i -e 's/input\/mice/psaux/' /etc/X11/XF86Config-ati
+    sed -i -e 's/input\/mice/psaux/' /etc/X11/XF86Config-nvidia
 fi
