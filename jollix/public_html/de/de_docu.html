@@ -891,11 +891,22 @@ tmpfs			/dev/shm	tmpfs		defaults		0 0
 
 <p>Anschliessend den Rechner neu starten und die neue jollix Festplatteninstallation booten.</p>
 
-<p>Die folgenden Schritte nach dem ersten Booten von jollix durchführen. Sie erfordern das Downloaden der im FTP Verzeichnis <span class="path">ftp://ftp.berlios.de/pub/jollix/spare/</span> enthaltenen Dateien. Dies sind: portage-spare.tar.bz2, kernel-spare.tar.bz2 und doc-spare.tar.bz2. Diese drei Dateien in <span class="path">/spare</span> speichern und die nachfolgenden Befehle als root ausführen.</p>
+<p>Die folgenden Schritte nach dem ersten Booten von jollix durchführen. Sie erfordern das Downloaden der im FTP Verzeichnis <span class="path">ftp://ftp.berlios.de/pub/jollix/spare/</span> enthaltenen Dateien. Dies sind: portage-spare.tar.bz2, kernel-spare.tar.bz2 und doc-spare.tar.bz2. Diese drei Dateien in <span class="path">/spare</span> speichern und die nachfolgenden Befehle als root ausführen. Also Konsole aufmachen und als root anmelden:</p>
 
 <table class="ntable" width="100%" cellspacing="0" cellpadding="0" border="0">
 <tr><td class="infohead" bgcolor="#eec625"><p>
 6.2: Portage, Kernel Archiv und Dokumentation wiederherstellen, Befehl: tar</p></td></tr>
+<tr><td bgcolor="#000000"><pre>
+<span class="greentext">user@jollix</span><span class="bluetext"> user # </span><span class="whitetext">su -</span>
+</pre></td></tr>
+<tr><td bgcolor="#000000"><pre>
+<span class="redtext">jollix</span><span class="bluetext"> / # </span><span class="whitetext">mv /home/user/Desktop/portage-spare.tar.bz2 /spare/</span>
+</pre>
+</td></tr>
+<tr><td bgcolor="#000000"><pre>
+<span class="redtext">jollix</span><span class="bluetext"> / # </span><span class="whitetext">mv /home/user/Desktop/kernel-spare.tar.bz2 /spare/</span>
+</pre>
+</td></tr>
 <tr><td bgcolor="#000000"><pre>
 <span class="redtext">jollix</span><span class="bluetext"> / # </span><span class="whitetext">cd /usr</span>
 </pre>
