@@ -1,5 +1,16 @@
-Bootoptionen:
+#####################################################################
+# jollix 0.1 Erste Schritte # http://www.jollix.de # 0.1 CS-Release #
+#####################################################################
 
+0. Was ist jollix 0.1?
+Jollix ist eine einfach zu installierende und komplett freie Linux Distribution 
+für die x86 Architektur, die auf Gentoo   Linux basiert. Mit jollix soll 
+haupstächlich dem Gamer und Multimedia-Enthusiast der vollständige Umstieg
+von MS-Windows auf Linux erleichtert werden. Die Version 0.1 ist die erste
+Beta-Release zum Testen von Counterstrike unter Linux. Weitere Spiele und
+die Möglichkeit zur Installation auf Deiner Festplatte folgen.
+
+1.Bootoptionen:
 install	   Bootet die CD, um jollix auf der ersten Festplatte zu installieren.
 local	   Bootet das Betriebsystem auf der Festplatte, falls vorhanden.
 
@@ -11,5 +22,34 @@ noscsi     deaktiviert die automatische Erkennung von SCSI-Geraeten
 nonet	   deaktiviert die automatische Erkennung von Netzwerkkarten (Ethernet)
 acpi=no    "Advanced Configuration and Power Interface". Falls Probleme beim
 	   Booten auftreten, kann versucht werden, ACPI zu deaktivieren.
-
 wheelmouse IMPS/2-kompatible Radmaus verwenden (!?)
+
+2. Netzwerk einrichten 
+Über Desktop-Button "Netzwerk einrichten" das lokale
+LAN-Netzwerk einrichten. eth0 bezeichnet die erste Netzwerkkarte im Rechner, 
+eth1 die zweite usw. Befindet sich nur eine Netzwerkkarte im Rechner, kann
+die Vorgabe "eth0" übernommen werden. Modem, ISDN und DSL wird in der
+aktuellen Version noch nicht unterstützt.
+
+3. Counterstrike einrichten
+Über den Desktop-Button "Counterstrike einrichten" eine Desktop-Verknüpfung 
+mit der Counterstrike Installation auf Deiner Festplatte einrichten. 
+Im erscheinenden Dialog den Installationsordner von Counterstrike angeben, 
+in dem sich hl.exe bzw. cstrike.exe befindet. Deine Festplatten werden in 
+dem Dialog so oder ähnlich erscheinen: ide/host0/bus0/target0/lun0/part1
+
+
+Viel Spass mit jollix!
+
+
+-- 
+Feedback erwünscht! 
+
+Web-Forum: www.jollix.de
+
+oder an
+
+patteh@berlios.de
+knochen@berlios.de
+
+
