@@ -24,7 +24,7 @@ for module in $(lsmod) ; do
 done
 
 # test fglrx module
-if [ ! $gfxmodule ] ; then
+if [ $gfxmodule = 0 ] ; then
     modprobe -q fglrx
     for module in $(lsmod) ; do
 	if [ "$module" = "fglrx" ] ; then
