@@ -1,3 +1,4 @@
+#!/bin/sh
 # Moduleloader
 # Copyright 2003 jollix
 # Jochen Spang <knochestolle@web.de>
@@ -32,11 +33,30 @@ done
 amixer set Master 100 unmute
 amixer set PCM 100 unmute
 
-sleep 5
+#USB PS/2 Maus Konfiguration
 
-if grep "Mouse" /proc/bus/usb/devices >/dev/null 
+#Warten bis usb/devices angelegt ist
+
+raushier=true
+declare -i counter=0
+while $raushier ; do
+ if grep -i "mouse" /proc/bus/usb/devices >/dev/null
+  then
+   raushier=false 
+  else
+   counter=${counter}+1
+   echo -n .
+   sleep 1 
+ fi
+ if [ $counter = 5 ]
+  then
+   raushier=false
+ fi
+done
+
+if grep -i "mouse" /proc/bus/usb/devices >/dev/null 
  then 
- sed -ie 's/psaux/input\/mice/' /etc/X11/XF86Config
+  sed -ie 's/psaux/input\/mice/' /etc/X11/XF86Config
 else
- sed -ie 's/input\/mice/psaux/' /etc/X11/XF86Config  
+  sed -ie 's/input\/mice/psaux/' /etc/X11/XF86Config  
 fi
