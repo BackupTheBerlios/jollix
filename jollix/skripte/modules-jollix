@@ -8,49 +8,48 @@
 
 # load all modules
 for module in $(pcimodules) ; do
- modprobe -s -k "$module"
+    modprobe -s -k "$module"
 done
+
+# GRAPHIC SECTION ################################################
+# graphic adapter module: 0=VESA, 1=NVIDIA, 2=FGLRX
+gfxmodule=0
 
 # test nvidia module
 modprobe -q nvidia
-nvidiafound=0
 for module in $(lsmod) ; do
-  if [ "$module" = "nvidia" ] ; then
-   nvidiafound=1
-  fi
+    if [ "$module" = "nvidia" ] ; then
+	gfxmodule=1
+    fi
 done
 
 # test fglrx module
-if [ $nvidiafound = 0 ] ; then
- modprobe -q fglrx
- fglrxfound=0
- for module in $(lsmod) ; do
-   if [ "$module" = "fglrx" ] ; then
-    fglrxfound=1
-   fi
- done
+if [ ! $gfxmodule ] ; then
+    modprobe -q fglrx
+    for module in $(lsmod) ; do
+	if [ "$module" = "fglrx" ] ; then
+	    gfxmodule=2
+	fi
+    done
 fi
 
-# vesa safemode
-if [ $nvidiafound = 0 ] ; then
- if [ $fglrxfound = 0 ] ; then
-  cp /etc/X11/XF86Config-vesa /etc/X11/XF86Config
-  opengl-update xfree
- fi
-fi
+case  $gfxmodule in
+    0) # use vesa safemode
+	cp /etc/X11/XF86Config-vesa /etc/X11/XF86Config
+	opengl-update xfree
+	;;
+    1) # switch to nvidia
+	cp /etc/X11/XF86Config-nvidia /etc/X11/XF86Config
+	opengl-update nvidia
+	;;
+    2) # switch to ati
+	cp /etc/X11/XF86Config-ati /etc/X11/XF86Config
+	opengl-update ati
+	;;
+esac
 
-# switch to nvidia
-if [ $nvidiafound = 1 ] ; then
- cp /etc/X11/XF86Config-nvidia /etc/X11/XF86Config
- opengl-update nvidia
-fi
 
-# switch to ati
-if [ $fglrxfound = 1 ] ; then
- cp /etc/X11/XF86Config-ati /etc/X11/XF86Config
- opengl-update ati
-fi
-
+# SOUND SECTION #####################################################
 # load oss
 for module in $(lsmod) ; do
   if [ "$module" = "snd" ] ; then
@@ -62,29 +61,28 @@ done
 amixer set Master 25 unmute
 amixer set PCM 25 unmute
 
-# USB PS/2 mouse configuration
+# USB PS/2 MOUSE SECTION #########################################
 # wait 5 sec. for usb/devices to be created (hackattack!)
-
-raushier=true
+goon=true
 declare -i counter=0
-while $raushier ; do
- if grep -i "mouse" /proc/bus/usb/devices >/dev/null
-  then
-   raushier=false 
-  else
-   counter=${counter}+1
-   echo -n .
-   sleep 1 
- fi
- if [ $counter = 5 ]
-  then
-   raushier=false
- fi
+while $goon ; do
+    if grep -i "mouse" /proc/bus/usb/devices >/dev/null
+	then
+	goon=false 
+    else
+	counter=${counter}+1
+	echo -n .
+	sleep 1 
+    fi
+    if [ $counter = 5 ]
+	then
+	goon=false
+    fi
 done
 
 if grep -i "mouse" /proc/bus/usb/devices >/dev/null 
- then 
-  sed -i -e 's/psaux/input\/mice/' /etc/X11/XF86Config
+    then 
+    sed -i -e 's/psaux/input\/mice/' /etc/X11/XF86Config
 else
-  sed -i -e 's/input\/mice/psaux/' /etc/X11/XF86Config  
+    sed -i -e 's/input\/mice/psaux/' /etc/X11/XF86Config  
 fi
