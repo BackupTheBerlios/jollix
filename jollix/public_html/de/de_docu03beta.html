@@ -635,7 +635,7 @@ grub> quit</span>
 </pre></td></tr>
 </table>
 
-<p>Die einfache grub.conf, wie unten abgebildet, kann sofort benutzt werden, sofern wie im 1. Beispiel nur jollix auf der Festplatte installiert wurde. Das zweite Beispiel bezieht sich auf eine Installation mit einem zweiten Betriebssystem in der 1. Partition der Festplatte. Die Nummerierung gleicht der oben beschriebenen, z.B. (hd0,1). Die grub.conf unten (einfache grub.conf) kann unver&auml;ndert so &uuml;bernommen werden, wenn die Partitionierung wie oben im 1. Beispiel gemacht wurde.<br>Hier ist es bei jollix 0.3 auch möglich die Bootparamet der LiveCD der Kernel Zeile hinzuzufügen. Für Besitzer einer Wheelmaus (Maus mit Mausrad) empfiehlt es sich, wheel als zuätzliche Bootoption anzugen. Jollix konfiguriert dann beim ersten Booten die X Konfigurationsdatei /etc/X11/XF86Config-4 mit Wheelmaus Unterstützung. </p>
+<p>Die einfache grub.conf, wie unten abgebildet, kann sofort benutzt werden, sofern wie im 1. Beispiel nur jollix auf der Festplatte installiert wurde. Das zweite Beispiel bezieht sich auf eine Installation mit einem zweiten Betriebssystem in der 1. Partition der Festplatte. Die Nummerierung gleicht der oben beschriebenen, z.B. (hd0,1). Die grub.conf unten (einfache grub.conf) kann unver&auml;ndert so &uuml;bernommen werden, wenn die Partitionierung wie oben im 1. Beispiel gemacht wurde.<br>Hier ist es bei jollix 0.3 auch möglich die Bootparamet der LiveCD der Kernel Zeile hinzuzufügen. Für Besitzer einer Wheelmaus (Maus mit Mausrad) empfiehlt es sich, wheel als zuätzliche Bootoption anzugen. Jollix konfiguriert dann beim ersten Booten die XOrg Konfigurationsdatei /etc/X11/xorg.conf mit Wheelmaus Unterstützung.</p>
 
 <table class="ncontent" width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td bgcolor="#dbdbdb">
 <p class="note"><b>Einfache grub.conf (jollix 0.3):</b></p>
@@ -968,7 +968,7 @@ NVidia Treiber laden, Befehl modprobe</p></td></tr>
 <table class="ncontent" width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td bgcolor="#dbdbdb">
 <p class="note"><b></b></p>
 <pre># /etc/modules.autoload.d/kernel-2.6:  kernel modules to load when system boots.
-# $Header: /home/xubuntu/berlios_backup/github/tmp-cvs/jollix/Repository/jollix/public_html/de/de_docu03beta.html,v 1.3 2004/05/07 19:49:13 knochen Exp $
+# $Header: /home/xubuntu/berlios_backup/github/tmp-cvs/jollix/Repository/jollix/public_html/de/de_docu03beta.html,v 1.4 2004/05/09 18:25:02 knochen Exp $
 #
 # Note that this file is for 2.6 kernels.
 #
@@ -1012,7 +1012,7 @@ Calculating dependencies ...done!
 [ebuild  N    ] media-video/ati-drivers-3.2.8-r1
 </pre>
 </td></tr></table>
-<p>Hier meldet emerge, dass die Version 3.2.8-r1 der ATI Treiber neu installiert werden soll, zu erkennen an [ebuild  N    ]<br>Wiederholt man emerge ohne den Schalter -p, wird die Installation durchgeführt.<br>Die von emerge vorgeschlagene Version des ATI Treibers entspricht sehr wahrscheinlich nicht der aktuellsten von ATI freigegeben Version. Dies bedeutet allerdings nicht, dass diese nicht unter Gentoo/jollix installierbar ist, sondern die von emerge -p vorgeschlagene Version entspricht vielmehr der von Gentoo momentan als stabil freigegebenen Version.<br>Möchte man die aktuellste (jedoch noch als nicht stabil maskierte) Version der Treiber installieren, so muss man vor dem nächsten Schritt die Umgebungsvariable ACCEPT_KEYWORDS auf "~x86" setzen. Hierbei riskiert man, dass evtl. Fehler und Instabilitäten auftreten, man stellt jedoch sicher, dass die in Portage als letztes verfügbare Version des Treibers installiert wird. Nachdem man die Umgebungsvariable gesetzt hat, bleibt diese bis zum Schließen der Konsole aktiv.</p>
+<p>Hier meldet emerge, dass die Version 3.2.8-r1 der ATI Treiber neu installiert werden soll, zu erkennen an [ebuild  N    ]<br>Wiederholt man emerge ohne den Schalter -p, wird die Installation durchgeführt.<br>ACHTUNG: Die von emerge vorgeschlagene Version des ATI Treibers entspricht sehr wahrscheinlich nicht der aktuellsten von ATI freigegeben Version. Dies bedeutet allerdings nicht, dass diese nicht unter Gentoo/jollix installierbar ist, sondern die von emerge -p vorgeschlagene Version entspricht vielmehr der von Gentoo momentan als stabil freigegebenen Version.<br>Jollix 0.3 benutzt als X Server bereits XOrg-X11 und es ist daher notwendig, die aktuelle Version der ATI Treiber zu installieren. Man erreicht dies, indem man vor dem Installieren die Umgebungsvariable ACCEPT_KEYWORDS auf "~x86" setzt. Nachdem man die Umgebungsvariable gesetzt hat, bleibt diese bis zum Schließen der Konsole aktiv. Daher sollte man vor dem Installieren weiterer Programme, diese wieder zurücksetzen auf "x86" bzw. die Konsole schließen und eine neue öffnen.</p>
 <table class="ntable" width="100%" cellspacing="0" cellpadding="0" border="0">
 <tr><td class="infohead" bgcolor="#eec625"><p>
 ATI Treiber installieren, Befehl emerge</p></td></tr>
@@ -1057,16 +1057,7 @@ ATI OpenGL aktivieren, Befehl opengl-update</p></td></tr>
 </pre>
 </td></tr>
 </table>
-<p>Die ATI OpenGL Umgebung für X11 wurde nun aktiviert. Der zuvor geladene Kernel Radeon Treiber muss vor der Aktivierung des original ATI Treibers fglrx noch deaktiviert werden.</p>
-<table class="ntable" width="100%" cellspacing="0" cellpadding="0" border="0">
-<tr><td class="infohead" bgcolor="#eec625"><p>
-Kernel  radeon Modul deaktivieren, Befehl rmmod</p></td></tr>
-<tr><td bgcolor="#000000"><pre>
-<span class="redtext">jollix</span><span class="bluetext"> / # </span><span class="whitetext">rmmod radeon</span>
-</pre>
-</td></tr>
-</table>
-<p>Die ATI Treiber sind jetzt vollständig installiert. Möchte man die Treiber und die OpenGL Umgebung direkt ohne Neustart des Rechners aktivieren, muss nur noch die Oberfläche neu gestartet werden. Befindet man sich im KDE, sollte man sich vorher abmelden und am Anmeldedialog angekommen X neu starten. Dies erreicht man mit der Tastenkombination [Strg]+[Alt]+[Backspace].</p>
+<p>Die ATI OpenGL Umgebung für X11 wurde nun aktiviert. Der zuvor geladene Kernel Radeon Treiber muss vor der Aktivierung des original ATI Treibers fglrx noch deaktiviert werden. Am einfachsten kann man dies mit einem Neustart des Rechners erreichen.</p>
 <p>Zum Schluss noch einige Worte zur Konfiguartionsdatei xorg.conf:<br>
 Die Konfigurationsdatei xorg.conf wird beim ersten Booten von der Festplatte automatisch angelegt, allerdings nur einmal. Besteht diese Datei bereits (nämlich ab dem 2. Booten), erkennt das die Autokonfiguration, so dass die vorhandene Datei nicht neu überschrieben wird und so die Einstellungen verloren gehen. Die Datei wird demnach nach dem ersten Booten von der Festplatte dynamisch erzeugt und kann dann auch zusätzlich bearbeitet werden. Tritt ein Fehler bei der Bearbeitung auf und die grafische Oberfläche lässt sich im Anschluss nicht mehr starten, kann die xorg.conf auch gelöscht bzw. umbenannt werden und jollix legt die Datei beim nächsten Booten wieder neu an mit den original Einstellungen. Man kann die Datei auch von Hand neu generieren, nachdem man sie gelöscht hat, mit dem Skript <span class="shell">mkxorgconf.sh</span> (als root). Dieses Skript wird auch beim Booten aufgerufen und erstellt dann die neue xorg.conf.</p>
 <table class="ncontent" width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td bgcolor="#dbdbdb">
