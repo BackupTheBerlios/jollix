@@ -13,7 +13,7 @@ cd_dir=$installdir
 subdirs=""
 gamename="Half-Life"
 gameexe="hl.exe"
-cdeath=""
+cdeath="0"
 modnames=""
 selected_mods=""
 atigamer="0"
@@ -103,9 +103,9 @@ select_cd() {
 				cdeath=0 ;;
 		esac
 	done
-	;;
 
-	cdeath=0 ;;
+    1)
+    	cdeath=0 ;;
     esac
     echo $cdeath
 }
