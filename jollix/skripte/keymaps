@@ -1,7 +1,7 @@
 #!/sbin/runscript
 # Copyright 1999-2003 Gentoo Technologies, Inc.
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /home/xubuntu/berlios_backup/github/tmp-cvs/jollix/Repository/jollix/skripte/keymaps,v 1.1 2003/10/10 16:53:05 knochen Exp $
+# $Header: /home/xubuntu/berlios_backup/github/tmp-cvs/jollix/Repository/jollix/skripte/keymaps,v 1.2 2003/10/19 17:34:33 knochen Exp $
 
 
 depend() {
@@ -43,7 +43,9 @@ start() {
 		then
 		export LANG_US="yes"
 	        sed -i -e 's/de-latin1-nodeadkeys/us/' /etc/rc.conf
-	    	sed -i -e 's/"de"/"us"/' /etc/X11/XF86Config
+	    	sed -i -e 's/"de"/"us"/' /etc/X11/XF86Config-nvidia
+	    	sed -i -e 's/"de"/"us"/' /etc/X11/XF86Config-ati
+	    	sed -i -e 's/"de"/"us"/' /etc/X11/XF86Config-vesa
  	    	sed -i -e 's/Country=de/Country=us/' /home/user/.kde3.1/share/config/kdeglobals
 	    	sed -i -e 's/Language=de/Language=en_US/' /home/user/.kde3.1/share/config/kdeglobals
 	    	chown user /home/user/.kde3.1/share/config/kdeglobals
