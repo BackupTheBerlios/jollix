@@ -5,7 +5,7 @@
 # for jollix <www.jollix.de>
 # location in cloop: /etc/init.d/local
 # Distributed under the terms of the GNU General Public License, v2 or later
-# $Header: /home/xubuntu/berlios_backup/github/tmp-cvs/jollix/Repository/jollix/skripte/local,v 1.14 2003/10/10 16:53:05 knochen Exp $
+# $Header: /home/xubuntu/berlios_backup/github/tmp-cvs/jollix/Repository/jollix/skripte/local,v 1.15 2003/10/16 18:46:04 knochen Exp $
 
 HILITE="\033[1m"
 NORMAL="\033[0m"
@@ -57,7 +57,7 @@ start() {
         /sbin/modules-jollix.sh
 
 	#Partitionen mounten
-	/sbin/transitmount
+	/sbin/transitmount 2> /dev/null
         /sbin/transitlink
 
         #ATI xinit workaround

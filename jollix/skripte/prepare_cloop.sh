@@ -48,12 +48,18 @@ cp ${JOLLIX_DIR}/etc/fstab ${JOLLIX_DIR}/spare/etc/fstab-org
 cp ${JOLLIX_DIR}/etc/init.d/local ${JOLLIX_DIR}/spare/etc/local-org
 cp ${JOLLIX_DIR}/etc/init.d/modules ${JOLLIX_DIR}/spare/etc/modules-org
 cp ${JOLLIX_DIR}/etc/init.d/checkroot ${JOLLIX_DIR}/spare/etc/checkroot-org
+cp ${JOLLIX_DIR}/etc/runlevels/boot/consolefont ${JOLLIX_DIR}/spare/etc/consolefont-org
+cp ${JOLLIX_DIR}/etc/runlevels/boot/netmount ${JOLLIX_DIR}/spare/etc/netmount-org
 #rm ${JOLLIX_DIR}/etc/runlevels/boot/keymaps
 cp ${WORK_DIR}/skripte/fstab ${JOLLIX_DIR}/etc/fstab
+cp ${WORK_DIR}/skripte/mtab ${JOLLIX_DIR}/etc/mtab
 cp ${WORK_DIR}/skripte/local ${JOLLIX_DIR}/etc/init.d/
 cp ${WORK_DIR}/skripte/modules ${JOLLIX_DIR}/etc/init.d/
 cp ${WORK_DIR}/skripte/checkroot ${JOLLIX_DIR}/etc/init.d/
 cp ${WORK_DIR}/skripte/keymaps ${JOLLIX_DIR}/etc/init.d/
+# runlevels
+rm -f ${JOLLIX_DIR}/etc/runlevels/boot/consolefont
+rm -f ${JOLLIX_DIR}/etc/runlevels/boot/netmount
 
 cp ${WORK_DIR}/skripte/modules-jollix.sh ${JOLLIX_DIR}/sbin/
 cp ${WORK_DIR}/skripte/transitmount ${JOLLIX_DIR}/sbin/
