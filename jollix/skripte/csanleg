@@ -1,0 +1,60 @@
+#!/bin/sh
+#        ####   csanleg   ####
+# legt eine Verknüpfung auf dem Desktop an, 
+# die Counter-Strike mittels wine startet.
+
+csordner=''
+csexe=1
+# Sartverzeichnis evtl. noch "intelligent" suchen
+startverz="/mnt"
+
+while [ $csexe == 1 ]  
+  do
+  csordner=`Xdialog --stdout --cancel-label "Abbrechen" --title "Counter-Strike Ordner angeben" --fselect $startverz 45 90`
+  cspath_exit=$?
+  case $cspath_exit in
+      0) # All OK. The $csordner variable holds everything entered/choosed by the user.
+	  if [ ! -d $csordner ] 
+	      then
+	      Xdialog --stdout --title "Fehler" --infobox "Kein Verzeichnis angegeben.\n Bitte das korrekte Verzeichnis angeben oder abbrechen." 10 60 9999
+	      csexe=1
+	  else
+	      if [ -f ${csordner}cstrike.exe ]
+		  then 
+		  csdesktop="[Desktop Entry]\n
+                            Comment=\n
+                            Comment[de]=\n
+                            Encoding=UTF-8\n
+                            Exec=wine -- ${csordner}cstrike.exe\n
+                            GenericName=\n
+                            GenericName[de]=\n
+                            Icon=${csordner}cstrike.xpm\n
+                            MimeType=\n
+                            Name=CounterStrike\n
+                            Name[de]=CounterStrike\n
+                            Path=\n
+                            ServiceTypes=\n
+                            SwallowExec=\n
+                            SwallowTitle=\n
+                            Terminal=false\n
+                            TerminalOptions=\n
+                            Type=Application\n
+                            X-KDE-SubstituteUID=false\n
+                            X-KDE-Username=\n"
+		  echo -e $csdesktop > /home/olli/Desktop/CounterStrike
+		  csexe=0
+	      else 
+		  Xdialog --stdout --title "Fehler" --infobox "Konnte die Datei \"cstrike.exe\" in\n $csordner\n nicht finden. Bitte das korrekte Verzeichnis angeben oder abbrechen." 10 60 9999
+	      fi
+	  fi
+	  ;;
+      1) # Cancel/No pressed.
+	  csexe=0
+	  ;;
+      255) # An error occured or the box was closed.
+	  csexe=0
+	  ;;
+  esac
+done
+
+exit 0
