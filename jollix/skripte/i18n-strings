@@ -1,0 +1,44 @@
+# i18n
+# this file provides some strings used for dialog boxes, 
+# dektop icon names etv
+# current supported languages: en de
+
+# location in livecd.cloop: /etc/i18n-strings
+
+# to be discarded!
+JOLLIXLANG=de
+
+case $JOLLIXLANG in
+    de)
+	# Xdialog messages
+	XDmodselect_ttl="Mods auswaehlen"
+	XDmodselect_msg="Fuer welche Half-Life Mods sollen\\nDesktop-Symbole angelegt werden?"
+	XDmodselect_ck1="Half-Life (kein Mod)" 
+	XDinstselect_ttl="Half-Life oder Counter-Strike?"
+	XDinstselect_msg="Einrichtung über eine Counter-Strike\\noder eine Half-Life Installation?" 
+	XDshcutscreate_ttl="$gamename Ordner angeben, in dem sich \"$gameexe\" befindet"
+	XDshcutscreate_err1="Konnte die Datei \"$gameexe\" in\\n$installdir\\n nicht finden. Bitte das korrekte Verzeichnis angeben oder abbrechen."
+	XDshcutscreate_err2="Kein Verzeichnis angegeben.\\nBitte das korrekte Verzeichnis angeben oder abbrechen."
+	XDshcutscreate_fin="Bitte etwas Geduld.\\nDas Anlegen der Desktop-Verknuepfung nimmt etwas Zeit in Anspruch."
+	XDok_label="Verknuepfung jetzt anlegen"
+	XDcancel_label="Abbrechen"
+	XDinstallfin_ttl="Erfolg"
+	XDinstallfin_msg="Vorgang erfolgreich abgeschlossen!\\nVerknuepfungen angelegt." 
+	;;
+    en)
+	# Xdialog messages
+	XDmodselect_ttl="Select Mods"
+	XDmodselect_msg="Choose Half-Life mods to create\\ndesktop icons for"
+	XDmodselect_ck1="Half-Life (no mod)" 	
+	XDinstselect_ttl="Half-Life or Counter-Strike?"
+	XDinstselect_msg="Installation via Counter-Strike\\noder Half-Life?" 
+	XDshcutscreate_ttl="Select $gamename folder with \"$gameexe\"."
+	XDshcutscreate_err1="Could not find file \"$gameexe\" in\\n$installdir\\n.Please select the correct directory or cancel."
+	XDshcutscreate_err2="Not a directory!\\nPlease select the correct directory or cancel."
+	XDshcutscreate_fin="Please be patient\\nCreation of desktop icons may take some while."
+	XDok_label="Create icons NOW"
+	XDcancel_label="Cancel"
+	XDinstallfin_ttl="Succes"
+	XDinstallfin_msg="Success!\\nIcons created."
+	;;	
+esac
