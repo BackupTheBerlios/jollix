@@ -255,7 +255,7 @@ IRC: irc://irc.quakenet.org/jollix
 					<li>6. Installation beenden und Rechner neu starten</li>
 				</ul>
 				<p class="chaphead"><span class="chapnum">1.</span>Vorbereitungen</p>
-				<p>Alle nun folgendenen Installationsschritte m&uuml;ssen als Superuser (root) in
+				<p>Alle nun folgenden Installationsschritte m&uuml;ssen als Superuser (root) in
 					einer Konsole des gebooteten jollix Systems durchgef&uuml;hrt werden. Hierzu &ouml;ffnet
 					man ein Konsolenfenster und meldet sich als Superuser mit dem Befehl
 					<span class="shell">su -</span> an [1.1].
@@ -318,7 +318,7 @@ tmpfs on / type tmpfs (rw)
 <p class="chaphead"><span class="chapnum">2.</span>Festplatte partitionieren</p>
 <p>ACHTUNG: Wie bereits in der Einleitung angek&uuml;ndigt, &uuml;bernimmt das Team von jollix keine Verantwortung f&uuml;r Sch&auml;den und/oder Datenverlust durch das Partitionieren der Festplatte! Durch fehlerhafte Partitionierung der Festplatte k&ouml;nnen alle darauf enthaltenen Daten verloren gehen. Die Partitionierung geschieht vollkommen auf eigene Gefahr!</p>
 <p>Im Folgenden soll kurz erl&auml;utert werden, was unter Partitionieren der Festplatte zu verstehen ist, in der f&uuml;r Linux typischen Benennung von Festplatten und Laufwerken und zwei m&ouml;gliche Partitionierungsm&ouml;glichkeiten aufgezeigt werden.</p>
-<p>Unter Partitionierung versteht man das Aufteilen der Festplatte in verschiedene Bereiche, die einzeln formatiert werden k&ouml;nnen. So entstehen durch Partitionierung einer 40GB Festplatte in 4 gleich grosse Teile 4 neue Festplatten zu 10GB. Die Partitionierung der Festplatte kann jederzeit wieder r&uuml;ckg&auml;ngig gemacht werden. Befindet sich eine Festplatte im Rechner, so wird diese in Linux als /dev/hda angesprochen, sofern sie als Master am ersten IDE Kanal angeschlossen ist. Eine zweite am ersten IDE Kanal als Slave angeschlossene Platte w&uuml;rde demnach als /dev/hdb, die Master Platte am zweiten IDE Kanal als /dev/hdc und wiederum die Slave Platte als /dev/hdd bezeichnet werden. In den meisten F&auml;llen werden am zweiten IDE Kanal CD/CD-RW/DVD -Laufwerke angeschlossen sein, diese werden dann ebenso bezeichnet mit hdc bzw. hdd. Die m&ouml;glichen Partitionen einer Festplatte werden durchnummiert. Befinden sich auf hda insgesammt 3 Partitionen, so werden diese mit hda1, hda2 und hda3 bezeichnet. In den nun folgenden zwei Bespielen wird davon ausgegangen, dass sich erstens &uuml;berhaupt keine Partition auf der Festplatte befindet, diese also unpartitioniert ist, bzw. dass die darauf vorhandenen Partitionen gel&ouml;scht werden k&ouml;nnen. Das zweite Beispiel geht davon aus, dass sich auf der Platte ein anderes Betriebssytem in der 1. Partition befindet, der Rest der Festplatte aber unpartitioniert ist. F&uuml;r den Fall, dass eine einzige Partition, die gesamte Festplatte belegt, bleibt nur eine komplette Neupartitionierung. Wichtig: Dabei gehen alle Daten auf der Festplatte verloren!</p>
+<p>Unter Partitionierung versteht man das Aufteilen der Festplatte in verschiedene Bereiche, die einzeln formatiert werden k&ouml;nnen. So entstehen durch Partitionierung einer 40GB Festplatte in 4 gleich grosse Teile 4 neue Festplatten zu 10GB. Die Partitionierung der Festplatte kann jederzeit wieder r&uuml;ckg&auml;ngig gemacht werden. Befindet sich eine Festplatte im Rechner, so wird diese in Linux als /dev/hda angesprochen, sofern sie als Master am ersten IDE Kanal angeschlossen ist. Eine zweite am ersten IDE Kanal als Slave angeschlossene Platte w&uuml;rde demnach als /dev/hdb, die Master Platte am zweiten IDE Kanal als /dev/hdc und wiederum die Slave Platte als /dev/hdd bezeichnet werden. In den meisten F&auml;llen werden am zweiten IDE Kanal CD/CD-RW/DVD -Laufwerke angeschlossen sein, diese werden dann ebenso bezeichnet mit hdc bzw. hdd. Die m&ouml;glichen Partitionen einer Festplatte werden von 1 an hochgezählt. Befinden sich auf hda insgesammt 3 Partitionen, so werden diese mit hda1, hda2 und hda3 bezeichnet. In den nun folgenden zwei Beispielen wird davon ausgegangen, dass sich erstens &uuml;berhaupt keine Partition auf der Festplatte befindet, diese also unpartitioniert ist, bzw. dass die darauf vorhandenen Partitionen gel&ouml;scht werden k&ouml;nnen. Das zweite Beispiel geht davon aus, dass sich auf der Platte ein anderes Betriebssystem in der 1. Partition befindet, der Rest der Festplatte aber unpartitioniert ist. F&uuml;r den Fall, dass eine einzige Partition, die gesamte Festplatte belegt, bleibt nur eine komplette Neupartitionierung. Wichtig: Dabei gehen alle Daten auf der Festplatte verloren!</p>
 <p>Beim Partitionieren unterscheidet man prim&auml;re und erweiterte Partitionen. Maximal k&ouml;nnen 4 prim&auml;re Partitionen angelegt werden (hda1 bis hda4). Sollen/M&uuml;ssen mehr als 4 Partitionen angelegt werden, muss sp&auml;testens die 4. Partition eine erweiterte Partition werden, in welcher dann wiederum logische Partitionen angelegt werden k&ouml;nnen.</p>
 
 <p>1. Beispiel: Im Rechner befindet sich eine vollkommen unbenutzte Festplatte, die komplett f&uuml;r jollix genutzt werden kann und keine weiteren Partitionen enth&auml;lt bzw. vorhandene gel&ouml;scht werden k&ouml;nnen. Eine minimale und sinnvolle Partitionierung besteht aus 3 Partitionen, n&auml;mlich aus einer boot- (hda1), einer swap- (hda2) und einer root-Partition (hda3):</p>
@@ -344,7 +344,7 @@ tmpfs on / type tmpfs (rw)
 	</tr>
 	<tr>
 	<td bgcolor="#dbdbdb" class="tableinfo">root Partition mit dem jollix System</td>
-	<td bgcolor="#dbdbdb" class="tableinfo">&gt;=2 GB</td>
+	<td bgcolor="#dbdbdb" class="tableinfo">&gt;=4 GB</td>
 	<td bgcolor="#dbdbdb" class="tableinfo">ext3</td>
 	<td bgcolor="#dbdbdb" class="tableinfo">/dev/hda3</td>
 	</tr>
@@ -379,7 +379,7 @@ tmpfs on / type tmpfs (rw)
 	</tr>
 	<tr>
 	<td bgcolor="#dbdbdb" class="tableinfo">root Partition mit dem jollix System</td>
-	<td bgcolor="#dbdbdb" class="tableinfo">&gt;=2 GB</td>
+	<td bgcolor="#dbdbdb" class="tableinfo">&gt;=4 GB</td>
 	<td bgcolor="#dbdbdb" class="tableinfo">ext3</td>
 	<td bgcolor="#dbdbdb" class="tableinfo">/dev/hda4</td>
 	</tr>
